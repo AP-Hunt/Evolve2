@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Evolve2
 {
-    public class Vertex : ICloneable
+    public class Vertex<T> : ICloneable
+        where T : struct
     {
-        private Guid _ident;
-        public Guid Identity
+        private T _ident;
+        private Util.IdentityProvider<T> _identProvider;
+        public T Identity
         {
             get
             {
@@ -23,12 +25,12 @@ namespace Evolve2
 
         public State State { get; private set; }
 
-        public Vertex():this(State.HEALTHY)
-        {}
+        public Vertex(Util.IdentityProvider<T> IdentityProvider)
+            : this(IdentityProvider, State.HEALTHY){}
 
-        public Vertex(State state)
+        public Vertex(Util.IdentityProvider<T> IdentityProvider, State state)
         {
-            this._ident = Guid.NewGuid();
+            this._ident = IdentityProvider.NewIdentity();
             this.State = state;
         }
 

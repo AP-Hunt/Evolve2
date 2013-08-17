@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Evolve2
 {
-    public class Edge : ICloneable
+    public class Edge<T> : ICloneable
+        where T : struct
     {
-        internal Vertex _source;
-        internal Vertex _destination;
-        public Guid Source { get; private set; }
-        public virtual Guid Destination { get; private set; }
-        public Edge(Vertex Source, Vertex Destination)
+        internal Vertex<T> _source;
+        internal Vertex<T> _destination;
+        public T Source { get; private set; }
+        public virtual T Destination { get; private set; }
+        public Edge(Vertex<T> Source, Vertex<T> Destination)
         {
             this.Source = Source.Identity;
             this.Destination = Destination.Identity;
@@ -23,13 +24,14 @@ namespace Evolve2
 
         public object Clone()
         {
-            return new Edge((Vertex)_source.Clone(), (Vertex)_destination.Clone());
+            return new Edge<T>((Vertex<T>)_source.Clone(), (Vertex<T>)_destination.Clone());
         }
     }
 
-    public class SubgraphEdge : Edge
+    public class SubgraphEdge<T> : Edge<T>
+        where T : struct
     {
-        public SubgraphEdge(Vertex Source, Graph G, Func<Graph, Vertex> VertexProducer)
+        public SubgraphEdge(Vertex<T> Source, Graph<T> G, Func<Graph<T>, Vertex<T>> VertexProducer)
             : base(Source, VertexProducer(G))
         { }
     }

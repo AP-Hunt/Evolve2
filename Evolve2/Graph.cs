@@ -3,44 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Evolve2;
 
 namespace Evolve2
 {
-    public class Graph : ICloneable
+    public class Graph<T> : ICloneable 
+        where T : struct
     {
-        internal Guid _ident;
-        public Guid Identity
+        internal T _ident;
+        private Util.IdentityProvider<T> _identProvider;
+        public T Identity
         {
             get
             {
                 return _ident;
             }
         }
-        public Graph()
+
+        public Graph(Util.IdentityProvider<T> IdentityProvider)
         {
-            _vertices = new Dictionary<Guid, Vertex>();
-            _edges = new List<Edge>();
-            _subGraphs = new Dictionary<Guid, Graph>();
-            _subGraphEdges = new Dictionary<Guid, List<SubgraphEdge>>();
-            _ident = Guid.NewGuid();
+            _vertices = new Dictionary<T, Vertex<T>>();
+            _edges = new List<Edge<T>>();
+            _subGraphs = new Dictionary<T, Graph<T>>();
+            _subGraphEdges = new Dictionary<T, List<SubgraphEdge<T>>>();
+            _ident = IdentityProvider.NewIdentity();
+            _identProvider = IdentityProvider;
         }
 
-        internal Dictionary<Guid, Vertex> _vertices;
-        public IEnumerable<Vertex> Vertices
+        internal Dictionary<T, Vertex<T>> _vertices;
+        public IEnumerable<Vertex<T>> Vertices
         {
             get
             {
                 return _vertices.Values.Union(_subGraphs.Values.SelectMany(g => g.Vertices));
             }
         }
-        public IEnumerable<Guid> VertexIdentities
+        public IEnumerable<T> VertexIdentities
         {
             get
             {
                 return _vertices.Keys.Union(_subGraphs.Values.SelectMany(g => g.VertexIdentities));
             }
         }
-        public Vertex FindVertex(Guid Identity)
+        public Vertex<T> FindVertex(T Identity)
         {
             if (!_vertices.ContainsKey(Identity))
             {
@@ -50,8 +55,8 @@ namespace Evolve2
             return _vertices[Identity];
         }
 
-        internal ICollection<Edge> _edges;
-        public IEnumerable<Edge> Edges
+        internal ICollection<Edge<T>> _edges;
+        public IEnumerable<Edge<T>> Edges
         {
             get
             {
@@ -59,15 +64,15 @@ namespace Evolve2
             }
         }
 
-        internal Dictionary<Guid, Graph> _subGraphs;
-        public IEnumerable<Graph> Subgraphs
+        internal Dictionary<T, Graph<T>> _subGraphs;
+        public IEnumerable<Graph<T>> Subgraphs
         {
             get
             {
                 return _subGraphs.Values;
             }
         }
-        public IEnumerable<Guid> SubgraphIdentities
+        public IEnumerable<T> SubgraphIdentities
         {
             get
             {
@@ -75,8 +80,8 @@ namespace Evolve2
             }
         }
 
-        internal Dictionary<Guid, List<SubgraphEdge>> _subGraphEdges;
-        public IEnumerable<SubgraphEdge> SubgraphEdgesForGraph(Guid GraphIdentity)
+        internal Dictionary<T, List<SubgraphEdge<T>>> _subGraphEdges;
+        public IEnumerable<SubgraphEdge<T>> SubgraphEdgesForGraph(T GraphIdentity)
         {
             if (!_subGraphEdges.ContainsKey(GraphIdentity))
             {
@@ -86,7 +91,7 @@ namespace Evolve2
             return _subGraphEdges[GraphIdentity];
         }
 
-        public void AddVertex(Vertex V)
+        public void AddVertex(Vertex<T> V)
         {
             if (!_vertices.ContainsKey(V.Identity))
             {
@@ -94,12 +99,12 @@ namespace Evolve2
             }
         }
 
-        internal bool hasVertex(Guid V)
+        internal bool hasVertex(T V)
         {
             return _vertices.ContainsKey(V);
         }
 
-        public void AddEdge(Edge E, bool Directed)
+        public void AddEdge(Edge<T> E, bool Directed)
         {
             if(!hasVertex(E.Source))
             {
@@ -115,18 +120,18 @@ namespace Evolve2
 
             if (!Directed)
             {
-                AddEdge(new Edge(E._destination, E._source), true);
+                AddEdge(new Edge<T>(E._destination, E._source), true);
             }
         }
 
-        public void AddSubgraph(Vertex Source, Graph G, Func<Graph, Vertex> VertexProducer)
+        public void AddSubgraph(Vertex<T> Source, Graph<T> G, Func<Graph<T>, Vertex<T>> VertexProducer)
         {
             if (!hasVertex(Source.Identity))
             {
                 throw new ArgumentException("Source", "Source vertex must be a part of the supergraph");
             }
 
-            if (this.Identity == G.Identity)
+            if (_identProvider.Equals(this.Identity, G.Identity))
             {
                 throw new ArgumentException("G", "Subgraph cannot be the supergraph");
             }
@@ -136,7 +141,7 @@ namespace Evolve2
                 throw new ArgumentException("G", "Subgraph already exists in supergraph");
             }
 
-            Vertex d = VertexProducer(G);
+            Vertex<T> d = VertexProducer(G);
             if (!G.hasVertex(d.Identity))
             {
                 throw new ArgumentException("VertexProducer", "Vertex returned from VertexProducer must be part of the subgraph");
@@ -146,47 +151,47 @@ namespace Evolve2
 
             if (!_subGraphEdges.ContainsKey(G.Identity))
             {
-                _subGraphEdges.Add(G.Identity, new List<SubgraphEdge>());
+                _subGraphEdges.Add(G.Identity, new List<SubgraphEdge<T>>());
             }
 
-            _subGraphEdges[G.Identity].Add(new SubgraphEdge(Source, G, VertexProducer));
+            _subGraphEdges[G.Identity].Add(new SubgraphEdge<T>(Source, G, VertexProducer));
         }
 
-        public IEnumerable<Vertex> VerticesByIdentity(IEnumerable<Guid> Identities)
+        public IEnumerable<Vertex<T>> VerticesByIdentity(IEnumerable<T> Identities)
         {
             return _vertices.Where(kv => Identities.Contains(kv.Key))
                             .Select(v => v.Value);
         }
 
-        public IEnumerable<Guid> VerticesConnectedToVertex(Guid VertexIdentity)
+        public IEnumerable<T> VerticesConnectedToVertex(T VertexIdentity)
         {
-            IEnumerable<SubgraphEdge> allSubgraphEdges = _subGraphEdges.Values.SelectMany(e => e);
-            IEnumerable<Edge> allEdges = Edges.Union(allSubgraphEdges);
+            IEnumerable<SubgraphEdge<T>> allSubgraphEdges = _subGraphEdges.Values.SelectMany(e => e);
+            IEnumerable<Edge<T>> allEdges = Edges.Union(allSubgraphEdges);
 
-            return allEdges.Where(e => e.Source == VertexIdentity)
+            return allEdges.Where(e => _identProvider.Equals(e.Source, VertexIdentity))
                            .Select(e => e.Destination);
         }
 
         public object Clone()
         {
-            Graph G = new Graph();
+            Graph<T> G = new Graph<T>(_identProvider);
             G._ident = this._ident;
 
             var newVertices = this._vertices.Select(v =>
             {
-                Vertex vert = (Vertex)v.Value.Clone();
-                KeyValuePair<Guid, Vertex> kv = new KeyValuePair<Guid, Vertex>(vert.Identity, vert);
+                Vertex<T> vert = (Vertex<T>)v.Value.Clone();
+                KeyValuePair<T, Vertex<T>> kv = new KeyValuePair<T, Vertex<T>>(vert.Identity, vert);
                 return kv;
             }).ToDictionary(kv => kv.Key, kv => kv.Value);
             G._vertices = newVertices;
 
-            var newEdges = this._edges.Select(e => (Edge)e.Clone()).ToList();
-            G._edges = new List<Edge>(newEdges);
+            var newEdges = this._edges.Select(e => (Edge<T>)e.Clone()).ToList();
+            G._edges = new List<Edge<T>>(newEdges);
 
             var newSubgraphs = this._subGraphs.Select(g =>
             {
-                Graph _g = (Graph)g.Value.Clone();
-                KeyValuePair<Guid, Graph> kv = new KeyValuePair<Guid, Graph>(_g.Identity, _g);
+                Graph<T> _g = (Graph<T>)g.Value.Clone();
+                KeyValuePair<T, Graph<T>> kv = new KeyValuePair<T, Graph<T>>(_g.Identity, _g);
                 return kv;
             }).ToDictionary(kv => kv.Key, kv => kv.Value);
             G._subGraphs = newSubgraphs;
@@ -194,8 +199,8 @@ namespace Evolve2
             var newSubgraphEdges = this._subGraphEdges.Select(sge =>
             {
                 var g = sge.Key;
-                List<SubgraphEdge> _sge = new List<SubgraphEdge>(sge.Value.Select(e => (SubgraphEdge)e.Clone()));
-                KeyValuePair<Guid, List<SubgraphEdge>> kv = new KeyValuePair<Guid, List<SubgraphEdge>>(g, _sge);
+                List<SubgraphEdge<T>> _sge = new List<SubgraphEdge<T>>(sge.Value.Select(e => (SubgraphEdge<T>)e.Clone()));
+                KeyValuePair<T, List<SubgraphEdge<T>>> kv = new KeyValuePair<T, List<SubgraphEdge<T>>>(g, _sge);
                 return kv;
             }).ToDictionary(k => k.Key, v => v.Value);
             G._subGraphEdges = newSubgraphEdges;
