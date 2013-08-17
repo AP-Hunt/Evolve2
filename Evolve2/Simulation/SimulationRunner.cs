@@ -33,12 +33,13 @@ namespace Evolve2.Simulation
             for (int rep = 0; rep <= Repetitions; rep++)
             {
                 Graph<TIdent> repGraph = (Graph<TIdent>)G.Clone();
+                Console.WriteLine("Starting with {0} health and {1} mutant", repGraph.Vertices.Count(v => v.State == State.HEALTHY), repGraph.Vertices.Count(v => v.State == State.MUTANT));
                 int iter = 0;
                 while(iter < Iterations && !graphFixated(repGraph) && !graphExtinct(repGraph))
                 {
                     IEnumerable<TIdent> targetState = _stateSelector.Select(repGraph, _random);
                     TIdent vertex = _vertexSelector.Select(targetState, repGraph, _random);
-                    IEnumerable<TIdent> destinationVertices = repGraph.VerticesConnectedToVertex(vertex);
+                    IEnumerable<TIdent> destinationVertices = repGraph.VerticesConnectedToVertex(vertex); 
                     TIdent victim = _victimSelector.Select(destinationVertices, repGraph, _random);
 
                     Vertex<TIdent> vert = repGraph.FindVertex(vertex);
@@ -47,6 +48,8 @@ namespace Evolve2.Simulation
                     vict.SwitchState(vert.State);
 
                     iter++;
+
+                    System.Diagnostics.Debug.WriteLine("Ending iteration with {0} healthy and {1} mutant", repGraph.Vertices.Count(v => v.State == State.HEALTHY), repGraph.Vertices.Count(v => v.State == State.MUTANT));
                 }
 
                 if (!graphFixated(repGraph) && !graphExtinct(repGraph))
@@ -64,6 +67,8 @@ namespace Evolve2.Simulation
                         result.Extinctions++;
                     }
                 }
+
+                System.Diagnostics.Debug.WriteLine("-----------------------------------------");
             }
 
             return result;

@@ -11,7 +11,7 @@ namespace Evolve2
         public T Select<T>(IEnumerable<T> Vertices, Graph<T> G, Random Random) where T : struct
         {
             int N = Vertices.Count();
-            int i = Random.Next(0, N - 1);
+            int i = Random.Next(0, N);
             return Vertices.ElementAt(i);
         }
     }

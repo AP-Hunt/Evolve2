@@ -17,7 +17,7 @@ namespace Evolve2.Simulation
         {
             get
             {
-                return ((double)(Fixations / RepetitionsPerformed));
+                return ((double)Fixations / (double)RepetitionsPerformed);
             }
         }
 
@@ -25,7 +25,15 @@ namespace Evolve2.Simulation
         {
             get
             {
-                return ((double)(Extinctions / RepetitionsPerformed));
+                return ((double)Extinctions / (double)RepetitionsPerformed);
+            }
+        }
+
+        public double TimeoutProbability
+        {
+            get
+            {
+                return ((double)Timeout / (double)RepetitionsPerformed);
             }
         }
     }

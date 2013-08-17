@@ -20,7 +20,7 @@ namespace Evolve2
              * [3] => Select mutant node set when Pr <= prMutant
              *      [3.1] => Otherwise choose healthy node set
              */
-            double R = 1.0d;
+            double R = 3.0d;
             int N = graph.Vertices.Count();
             int m = graph.Vertices.Count(v => v.State == State.MUTANT);
             double prMutant = ((R*m)/((R*m)+(N-m)));
