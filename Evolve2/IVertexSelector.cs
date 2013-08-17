@@ -9,6 +9,6 @@ namespace Evolve2
 {
     public interface IVertexSelector
     {
-        T Select<T>(IEnumerable<T> Vertices, Graph<T> G) where T : struct;
+        T Select<T>(IEnumerable<T> Vertices, Graph<T> G, Random Random) where T : struct;
     }
 }

@@ -11,14 +11,17 @@ namespace Evolve2.Simulation
         private IStateSelector _stateSelector;
         private IVertexSelector _vertexSelector;
         private IVictimSelector _victimSelector;
-        private Util.RandomProvider _random;
+        private Random _random;
 
-        public SimulationRunner(IStateSelector StateSelector, IVertexSelector VertexSelector, IVictimSelector VictimSelector)
+        public SimulationRunner(IStateSelector StateSelector, IVertexSelector VertexSelector, IVictimSelector VictimSelector) :
+            this(StateSelector, VertexSelector, VictimSelector, Util.RandomProvider.Random)
+        { }
+        public SimulationRunner(IStateSelector StateSelector, IVertexSelector VertexSelector, IVictimSelector VictimSelector, Random Random)
         {
             _stateSelector = StateSelector;
             _vertexSelector = VertexSelector;
             _victimSelector = VictimSelector;
-            _random = new Util.RandomProvider();
+            _random = Random;
         }
 
         public SimulationResult RunOn<TIdent>(Graph<TIdent> G, int Repetitions, int Iterations)
@@ -33,10 +36,10 @@ namespace Evolve2.Simulation
                 int iter = 0;
                 while(iter < Iterations && !graphFixated(repGraph) && !graphExtinct(repGraph))
                 {
-                    IEnumerable<TIdent> targetState = _stateSelector.Select(repGraph);
-                    TIdent vertex = _vertexSelector.Select(targetState, repGraph);
+                    IEnumerable<TIdent> targetState = _stateSelector.Select(repGraph, _random);
+                    TIdent vertex = _vertexSelector.Select(targetState, repGraph, _random);
                     IEnumerable<TIdent> destinationVertices = repGraph.VerticesConnectedToVertex(vertex);
-                    TIdent victim = _victimSelector.Select(destinationVertices, repGraph);
+                    TIdent victim = _victimSelector.Select(destinationVertices, repGraph, _random);
 
                     Vertex<TIdent> vert = repGraph.FindVertex(vertex);
                     Vertex<TIdent> vict = repGraph.FindVertex(victim);
