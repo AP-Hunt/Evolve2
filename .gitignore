@@ -1,0 +1,7 @@
+*.dll
+*.exe
+/Evolve2/bin/Debug/
+/Evolve2/bin/Release/
+/Evolve2/obj/Debug/
+/Evolve2.Tests/bin/Debug/
+/Evolve2.Tests/obj/Debug/
