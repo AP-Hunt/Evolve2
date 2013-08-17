@@ -8,6 +8,6 @@ namespace Evolve2
 {
     public interface IVictimSelector
     {
-        Guid Select(IEnumerable<Guid> Vertices, Graph G);
+        T Select<T>(IEnumerable<T> Vertices, Graph<T> G) where T : struct;
     }
 }

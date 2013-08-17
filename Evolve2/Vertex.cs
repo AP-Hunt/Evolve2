@@ -6,31 +6,16 @@ using System.Threading.Tasks;
 
 namespace Evolve2
 {
-    public class Vertex<T> : ICloneable
+    public class Vertex<T> : GraphElement<T>, ICloneable
         where T : struct
     {
-        private T _ident;
-        private Util.IdentityProvider<T> _identProvider;
-        public T Identity
-        {
-            get
-            {
-                return _ident;
-            }
-            internal set
-            {
-                _ident = value;
-            }
-        }
-
         public State State { get; private set; }
 
-        public Vertex(Util.IdentityProvider<T> IdentityProvider)
+        public Vertex(Util.IIdentityProvider<T> IdentityProvider)
             : this(IdentityProvider, State.HEALTHY){}
 
-        public Vertex(Util.IdentityProvider<T> IdentityProvider, State state)
+        public Vertex(Util.IIdentityProvider<T> IdentityProvider, State state) : base (IdentityProvider)
         {
-            this._ident = IdentityProvider.NewIdentity();
             this.State = state;
         }
 
@@ -41,7 +26,7 @@ namespace Evolve2
 
         public object Clone()
         {
-            Vertex v = new Vertex(this.State);
+            Vertex<T> v = new Vertex<T>(_identProvider, this.State);
             v.Identity = this.Identity;
 
             return v;

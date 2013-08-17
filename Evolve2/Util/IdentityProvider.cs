@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Evolve2.Util
 {
-    public abstract class IdentityProvider<T> 
-        where T : struct 
+    public interface IIdentityProvider<TIdent> 
+        where TIdent : struct 
     {
-        public virtual T NewIdentity();
-        public virtual bool Equals(T a, T b);
+        TIdent NewIdentity();
+        bool Equals(TIdent a, TIdent b);
     }
 }

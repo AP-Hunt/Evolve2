@@ -9,6 +9,6 @@ namespace Evolve2
 {
     public interface IStateSelector
     {
-        IEnumerable<Guid> Select(Graph graph, RandomProvider Random);
+        IEnumerable<T> Select<T>(Graph<T> graph) where T : struct;
     }
 }

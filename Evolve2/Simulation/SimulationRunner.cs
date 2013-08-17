@@ -11,34 +11,35 @@ namespace Evolve2.Simulation
         private IStateSelector _stateSelector;
         private IVertexSelector _vertexSelector;
         private IVictimSelector _victimSelector;
-        private RandomProvider _random;
+        private Util.RandomProvider _random;
 
         public SimulationRunner(IStateSelector StateSelector, IVertexSelector VertexSelector, IVictimSelector VictimSelector)
         {
             _stateSelector = StateSelector;
             _vertexSelector = VertexSelector;
             _victimSelector = VictimSelector;
-            _random = new RandomProvider();
+            _random = new Util.RandomProvider();
         }
 
-        public SimulationResult RunOn(Graph G, int Repetitions, int Iterations)
+        public SimulationResult RunOn<TIdent>(Graph<TIdent> G, int Repetitions, int Iterations)
+            where TIdent : struct
         {
             SimulationResult result = new SimulationResult();
             result.RepetitionsPerformed = Repetitions;
 
             for (int rep = 0; rep <= Repetitions; rep++)
             {
-                Graph repGraph = (Graph)G.Clone();
+                Graph<TIdent> repGraph = (Graph<TIdent>)G.Clone();
                 int iter = 0;
                 while(iter < Iterations && !graphFixated(repGraph) && !graphExtinct(repGraph))
                 {
-                    IEnumerable<Guid> targetState = _stateSelector.Select(repGraph, _random);
-                    Guid vertex = _vertexSelector.Select(targetState, repGraph, _random);
-                    IEnumerable<Guid> destinationVertices = repGraph.VerticesConnectedToVertex(vertex);
-                    Guid victim = _victimSelector.Select(destinationVertices, repGraph);
+                    IEnumerable<TIdent> targetState = _stateSelector.Select(repGraph);
+                    TIdent vertex = _vertexSelector.Select(targetState, repGraph);
+                    IEnumerable<TIdent> destinationVertices = repGraph.VerticesConnectedToVertex(vertex);
+                    TIdent victim = _victimSelector.Select(destinationVertices, repGraph);
 
-                    Vertex vert = repGraph.FindVertex(vertex);
-                    Vertex vict = repGraph.FindVertex(victim);
+                    Vertex<TIdent> vert = repGraph.FindVertex(vertex);
+                    Vertex<TIdent> vict = repGraph.FindVertex(victim);
 
                     vict.SwitchState(vert.State);
 
@@ -65,12 +66,12 @@ namespace Evolve2.Simulation
             return result;
         }
 
-        private bool graphFixated(Graph G)
+        private bool graphFixated<T>(Graph<T> G) where T : struct
         {
             return G.Vertices.All(v => v.State == State.MUTANT);
         }
 
-        private bool graphExtinct(Graph G)
+        private bool graphExtinct<T>(Graph<T> G) where T : struct
         {
             return G.Vertices.All(v => v.State == State.HEALTHY);
         }

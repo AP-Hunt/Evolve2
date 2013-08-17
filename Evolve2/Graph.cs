@@ -7,27 +7,15 @@ using Evolve2;
 
 namespace Evolve2
 {
-    public class Graph<T> : ICloneable 
+    public class Graph<T> : GraphElement<T>,  ICloneable
         where T : struct
     {
-        internal T _ident;
-        private Util.IdentityProvider<T> _identProvider;
-        public T Identity
-        {
-            get
-            {
-                return _ident;
-            }
-        }
-
-        public Graph(Util.IdentityProvider<T> IdentityProvider)
+        public Graph(Util.IIdentityProvider<T> IdentityProvider) : base (IdentityProvider)
         {
             _vertices = new Dictionary<T, Vertex<T>>();
             _edges = new List<Edge<T>>();
             _subGraphs = new Dictionary<T, Graph<T>>();
             _subGraphEdges = new Dictionary<T, List<SubgraphEdge<T>>>();
-            _ident = IdentityProvider.NewIdentity();
-            _identProvider = IdentityProvider;
         }
 
         internal Dictionary<T, Vertex<T>> _vertices;
@@ -120,7 +108,7 @@ namespace Evolve2
 
             if (!Directed)
             {
-                AddEdge(new Edge<T>(E._destination, E._source), true);
+                AddEdge(new Edge<T>(E._destination, E._source, _identProvider), true);
             }
         }
 
@@ -154,7 +142,7 @@ namespace Evolve2
                 _subGraphEdges.Add(G.Identity, new List<SubgraphEdge<T>>());
             }
 
-            _subGraphEdges[G.Identity].Add(new SubgraphEdge<T>(Source, G, VertexProducer));
+            _subGraphEdges[G.Identity].Add(new SubgraphEdge<T>(Source, G, VertexProducer, _identProvider));
         }
 
         public IEnumerable<Vertex<T>> VerticesByIdentity(IEnumerable<T> Identities)

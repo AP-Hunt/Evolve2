@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Evolve2.Util
 {
-    public class GuidIdentityProvider : IdentityProvider<Guid>
+    public class GuidIdentityProvider : IIdentityProvider<Guid>
     {
-        public override Guid NewIdentity()
+        public Guid NewIdentity()
         {
             return Guid.NewGuid();
         }
 
-        public override bool Equals(Guid a, Guid b)
+        public bool Equals(Guid a, Guid b)
         {
             return a == b;
         }

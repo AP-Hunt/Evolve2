@@ -8,7 +8,8 @@ namespace Evolve2
 {
     public class StateSelector : IStateSelector
     {
-        public IEnumerable<Guid> Select(Graph graph, RandomProvider RandomProvider)
+        public IEnumerable<T> Select<T>(Graph<T> graph) 
+            where T : struct
         {
             /**
              * Process
@@ -23,7 +24,7 @@ namespace Evolve2
             int N = graph.Vertices.Count();
             int m = graph.Vertices.Count(v => v.State == State.MUTANT);
             double prMutant = ((R*m)/((R*m)+(N-m)));
-            double pr = RandomProvider.Random.NextDouble();
+            double pr = Util.RandomProvider.Random.NextDouble();
 
             if (pr <= prMutant)
             {

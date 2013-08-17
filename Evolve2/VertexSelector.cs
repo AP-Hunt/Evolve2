@@ -8,10 +8,10 @@ namespace Evolve2
 {
     public class VertexSelector : IVertexSelector
     {
-        public Guid Select(IEnumerable<Guid> Vertices, Graph G, RandomProvider RandomProvider)
+        public T Select<T>(IEnumerable<T> Vertices, Graph<T> G) where T : struct
         {
             int N = Vertices.Count();
-            int i = RandomProvider.Random.Next(0, N - 1);
+            int i = Util.RandomProvider.Random.Next(0, N - 1);
             return Vertices.ElementAt(i);
         }
     }

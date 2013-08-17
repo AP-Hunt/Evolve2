@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>d15fb248-4e71-4cd1-97de-13fde6698d84</ProjectGuid>
+    <ProjectGuid>{20BA005C-87CC-4E1E-A980-9C383680ECF3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Evolve2.Tests</RootNamespace>
