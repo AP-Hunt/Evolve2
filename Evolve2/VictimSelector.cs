@@ -10,9 +10,10 @@ namespace Evolve2
     {
         public T Select<T>(IEnumerable<T> Vertices, Graph<T> G, Random Random) where T : struct
         {
-            int N = Vertices.Count();
+            var vertList = Vertices.ToList(); //Force evaluation on the list, so we're not reevaluating later
+            int N = vertList.Count();
             int i = Random.Next(0, N);
-            return Vertices.ElementAt(i); 
+            return vertList[i];
         }
     }
 }

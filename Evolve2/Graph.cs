@@ -153,11 +153,11 @@ namespace Evolve2
 
         public IEnumerable<T> VerticesConnectedToVertex(T VertexIdentity)
         {
-            IEnumerable<SubgraphEdge<T>> allSubgraphEdges = _subGraphEdges.Values.SelectMany(e => e);
-            IEnumerable<Edge<T>> allEdges = Edges.Union(allSubgraphEdges);
+            IEnumerable<T> verticesInSubgraphs = _subGraphs.SelectMany(g => g.Value.VerticesConnectedToVertex(VertexIdentity));
+            IEnumerable<T> verticesInThisGraph = Edges.Where(e => _identProvider.Equals(e.Source, VertexIdentity))
+                                                      .Select(e => e.Destination);
 
-            return allEdges.Where(e => _identProvider.Equals(e.Source, VertexIdentity))
-                           .Select(e => e.Destination);
+            return Enumerable.Union(verticesInThisGraph, verticesInSubgraphs);
         }
 
         public object Clone()
