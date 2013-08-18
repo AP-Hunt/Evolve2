@@ -1,9 +1,9 @@
 Evolve2
 =======
 
-A second revision of my .NET evolutionary graph research framework. The original version (known as Evolve) was submitted as part of the dissertation for my software engineering degree under the supervision of [Dr George Mertzios](http://www.dur.ac.uk/george.mertzios/) at Durham University.
+A second revision of my .NET evolutionary graph research library. The original version (known as Evolve) was submitted as part of the dissertation for my software engineering degree under the supervision of [Dr George Mertzios](http://www.dur.ac.uk/george.mertzios/) at Durham University.
 
-This framework provides tools for performing experiments on [evolving graphs](http://en.wikipedia.org/wiki/Evolutionary_graph_theory) with the intention of being as generically applicable (to the problem space) as possible without sacrificing a clean API and simple setup.
+This library provides tools for performing experiments on [evolving graphs](http://en.wikipedia.org/wiki/Evolutionary_graph_theory) with the intention of being as generically applicable (to the problem space) as possible without sacrificing a clean API and simple setup.
 
 Over time, the tools provided will expand. As of last writing, tools include:
 * Graph construction with support for subgraphs (and running simulations on *just* a subgraph)
