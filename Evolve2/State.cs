@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Evolve2
 {
-    public enum State
+    public enum States
     {
         HEALTHY = 0,
         MUTANT = 1

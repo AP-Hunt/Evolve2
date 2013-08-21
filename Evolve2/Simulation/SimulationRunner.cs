@@ -33,7 +33,7 @@ namespace Evolve2.Simulation
             for (int rep = 0; rep <= Repetitions; rep++)
             {
                 Graph<TIdent> repGraph = (Graph<TIdent>)G.Clone();
-                Console.WriteLine("Starting with {0} health and {1} mutant", repGraph.Vertices.Count(v => v.State == State.HEALTHY), repGraph.Vertices.Count(v => v.State == State.MUTANT));
+                Console.WriteLine("Starting with {0} health and {1} mutant", repGraph.Vertices.Count(v => v.State == States.HEALTHY), repGraph.Vertices.Count(v => v.State == States.MUTANT));
                 int iter = 0;
                 while(iter < Iterations && !graphFixated(repGraph) && !graphExtinct(repGraph))
                 {
@@ -49,7 +49,7 @@ namespace Evolve2.Simulation
 
                     iter++;
 
-                    System.Diagnostics.Debug.WriteLine("Ending iteration with {0} healthy and {1} mutant", repGraph.Vertices.Count(v => v.State == State.HEALTHY), repGraph.Vertices.Count(v => v.State == State.MUTANT));
+                    System.Diagnostics.Debug.WriteLine("Ending iteration with {0} healthy and {1} mutant", repGraph.Vertices.Count(v => v.State == States.HEALTHY), repGraph.Vertices.Count(v => v.State == States.MUTANT));
                 }
 
                 if (!graphFixated(repGraph) && !graphExtinct(repGraph))
@@ -76,12 +76,12 @@ namespace Evolve2.Simulation
 
         private bool graphFixated<T>(Graph<T> G) where T : struct
         {
-            return G.Vertices.All(v => v.State == State.MUTANT);
+            return G.Vertices.All(v => v.State == States.MUTANT);
         }
 
         private bool graphExtinct<T>(Graph<T> G) where T : struct
         {
-            return G.Vertices.All(v => v.State == State.HEALTHY);
+            return G.Vertices.All(v => v.State == States.HEALTHY);
         }
     }
 }

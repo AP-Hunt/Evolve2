@@ -27,41 +27,41 @@ namespace Evolve2.Tests
         public void State_HealthyByDefault()
         {
             Vertex<Guid> v = new Vertex<Guid>(guidProvider);
-            Assert.AreEqual<State>(v.State, State.HEALTHY);
+            Assert.AreEqual<States>(v.State, States.HEALTHY);
         }
 
         [TestMethod]
         public void State_HealthyBySetting()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider, State.HEALTHY);
-            Assert.AreEqual<State>(v.State, State.HEALTHY);
+            Vertex<Guid> v = new Vertex<Guid>(guidProvider, States.HEALTHY);
+            Assert.AreEqual<States>(v.State, States.HEALTHY);
         }
 
         [TestMethod]
         public void State_MutantBySetting()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider, State.MUTANT);
-            Assert.AreEqual<State>(v.State, State.MUTANT);
+            Vertex<Guid> v = new Vertex<Guid>(guidProvider, States.MUTANT);
+            Assert.AreEqual<States>(v.State, States.MUTANT);
         }
 
         [TestMethod]
         public void SwitchState_MutantToHealthy()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider, State.MUTANT);
+            Vertex<Guid> v = new Vertex<Guid>(guidProvider, States.MUTANT);
 
-            Assert.AreEqual<State>(v.State, State.MUTANT);
-            v.SwitchState(State.HEALTHY);
-            Assert.AreEqual<State>(v.State, State.HEALTHY);
+            Assert.AreEqual<States>(v.State, States.MUTANT);
+            v.SwitchState(States.HEALTHY);
+            Assert.AreEqual<States>(v.State, States.HEALTHY);
         }
 
         [TestMethod]
         public void SwitchState_HealthyToMutant()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider, State.HEALTHY);
+            Vertex<Guid> v = new Vertex<Guid>(guidProvider, States.HEALTHY);
 
-            Assert.AreEqual<State>(v.State, State.HEALTHY);
-            v.SwitchState(State.MUTANT);
-            Assert.AreEqual<State>(v.State, State.MUTANT);
+            Assert.AreEqual<States>(v.State, States.HEALTHY);
+            v.SwitchState(States.MUTANT);
+            Assert.AreEqual<States>(v.State, States.MUTANT);
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace Evolve2.Tests
             Vertex<Guid> v = new Vertex<Guid>(guidProvider);
             Vertex<Guid> v2 = (Vertex<Guid>)v.Clone();
 
-            Assert.AreEqual<State>(v.State, v2.State);
+            Assert.AreEqual<States>(v.State, v2.State);
         }
 
         [TestMethod]

@@ -20,7 +20,7 @@ namespace Evolve2
             {
                 vertices.Add(new Vertex<Guid>(identProv));
             }
-            vertices.Add(new Vertex<Guid>(identProv, State.MUTANT));
+            vertices.Add(new Vertex<Guid>(identProv, States.MUTANT));
 
             for (int i = 0; i <= 49; i++)
             {

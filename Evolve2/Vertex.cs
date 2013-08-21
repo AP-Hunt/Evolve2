@@ -9,17 +9,17 @@ namespace Evolve2
     public class Vertex<T> : GraphElement<T>, ICloneable
         where T : struct
     {
-        public State State { get; private set; }
+        public States State { get; private set; }
 
         public Vertex(Util.IIdentityProvider<T> IdentityProvider)
-            : this(IdentityProvider, State.HEALTHY){}
+            : this(IdentityProvider, States.HEALTHY){}
 
-        public Vertex(Util.IIdentityProvider<T> IdentityProvider, State state) : base (IdentityProvider)
+        public Vertex(Util.IIdentityProvider<T> IdentityProvider, States state) : base (IdentityProvider)
         {
             this.State = state;
         }
 
-        public void SwitchState(State NewState)
+        public void SwitchState(States NewState)
         {
             this.State = NewState;
         }
