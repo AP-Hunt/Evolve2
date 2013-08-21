@@ -22,17 +22,17 @@ namespace Evolve2
              */
             double R = 3.0d;
             int N = graph.Vertices.Count();
-            int m = graph.Vertices.Count(v => v.State == State.MUTANT);
+            int m = graph.Vertices.Count(v => v.State == States.MUTANT);
             double prMutant = ((R*m)/((R*m)+(N-m)));
             double pr = Random.NextDouble();
 
             if (pr <= prMutant)
             {
-                return graph.Vertices.Where(v => v.State == State.MUTANT).Select(v => v.Identity);
+                return graph.Vertices.Where(v => v.State == States.MUTANT).Select(v => v.Identity);
             }
             else
             {
-                return graph.Vertices.Where(v => v.State == State.HEALTHY).Select(v => v.Identity);
+                return graph.Vertices.Where(v => v.State == States.HEALTHY).Select(v => v.Identity);
             }
         }
     }
