@@ -7,13 +7,17 @@ This library provides tools for performing experiments on [evolving graphs](http
 
 Over time, the tools provided will expand. As of last writing, tools include:
 * Graph construction with support for subgraphs (and running simulations on *just* a subgraph)
-* Stateful vertices (curently limited to binary state).
-* A simple implementation of the modified [Moran Process](http://en.wikipedia.org/wiki/Moran_Process) as proposed by [Lieberman et al. (2005)](http://abel.math.harvard.edu/archive/153_fall_04/Additional_reading_material/evolutionary%20graph%20theory.pdf).
+* Helpers for creating common graph structures. Current helpers:
+    1. Chain
+	2. Clique
+	3. Burst
+* A library of evolutionary graph simulations (Evolve2.Simulations). Current implementations:  
+    - Modified [Moran Process](http://en.wikipedia.org/wiki/Moran_Process) as proposed by [Lieberman et al. (2005)](http://abel.math.harvard.edu/archive/153_fall_04/Additional_reading_material/evolutionary%20graph%20theory.pdf).
 
 Future additions are likely to be:
-* More fine grained control of vertex state
 * Allowing srucutral changes in the graph to occur during simulation
-* Helpers for common graph structures (such as cliques, wheels, paths etc)
+* More simulations
+* Cleaner API (less need for generics, easier for the compiler to infer the type) 
 * Performance improvements
 
 
