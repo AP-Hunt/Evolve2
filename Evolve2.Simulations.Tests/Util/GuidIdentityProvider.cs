@@ -7,12 +7,12 @@ namespace Evolve2.Tests.Util
     [TestClass]
     public class GuidIdentityProvider
     {
-        Evolve2.Util.GuidIdentityProvider Provider;
+        Evolve2.Util.DefaultIdentityProvider Provider;
 
         [TestInitialize]
         public void Setup()
         {
-            Provider = new Evolve2.Util.GuidIdentityProvider();
+            Provider = new Evolve2.Util.DefaultIdentityProvider();
         }
 
         [TestCleanup]

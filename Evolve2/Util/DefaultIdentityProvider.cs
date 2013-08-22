@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Evolve2.Util
 {
-    public class GuidIdentityProvider : IIdentityProvider<Guid>
+    public class DefaultIdentityProvider : IIdentityProvider<Guid>
     {
         public Guid NewIdentity()
         {

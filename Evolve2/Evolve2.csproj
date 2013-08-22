@@ -47,12 +47,20 @@
     <Compile Include="Edge.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="GraphElement.cs" />
+    <Compile Include="GraphTypeHelpers\Burst.cs" />
+    <Compile Include="GraphTypeHelpers\Chain.cs" />
+    <Compile Include="GraphTypeHelpers\Clique.cs" />
+    <Compile Include="GraphTypeHelpers\GraphTypeHelper.cs" />
     <Compile Include="State\IStateful.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="State\IState.cs" />
     <Compile Include="State\StateBase.cs" />
-    <Compile Include="Util\GuidIdentityProvider.cs" />
-    <Compile Include="Util\IdentityProvider.cs" />
+    <Compile Include="Util\Factories\DefaultEdgeFactory.cs" />
+    <Compile Include="Util\Factories\DefaultVertexFactory.cs" />
+    <Compile Include="Util\Factories\IEdgeFactory.cs" />
+    <Compile Include="Util\Factories\IVertexFactory.cs" />
+    <Compile Include="Util\DefaultIdentityProvider.cs" />
+    <Compile Include="Util\IIdentityProvider.cs" />
     <Compile Include="Util\RandomProvider.cs" />
     <Compile Include="Vertex.cs" />
   </ItemGroup>

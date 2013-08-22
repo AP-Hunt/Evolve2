@@ -12,7 +12,7 @@ namespace Evolve2.Simulations
     {
         static void Main(string[] args)
         {
-            Util.IIdentityProvider<Guid> identProv = new Util.GuidIdentityProvider();
+            Util.IIdentityProvider<Guid> identProv = new Util.DefaultIdentityProvider();
             Graph<Guid> superGraph = new Graph<Guid>(identProv);
 
 
