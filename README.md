@@ -20,5 +20,3 @@ Future additions are likely to be:
 * Cleaner API (less need for generics, easier for the compiler to infer the type) 
 * Performance improvements
 * More complete and thorough test suite
-
-For usage examples, see Evolve2/Program.cs (for now).
