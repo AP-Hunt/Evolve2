@@ -1,13 +1,13 @@
 *.dll
 *.exe
 *.suo
-*.pdb
+.pdb
 /Evolve2.v11
 /Evolve2/bin/Debug/
 /Evolve2/bin/Release/
 /Evolve2/obj/Debug/
 /Evolve2.Simulations/bin/
 /Evolve2.Simulations/obj/
-/Evolve2.Simulations.Tests/bin/Debug/
-/Evolve2.Simulations.Tests/obj/Debug/
+\Evolve2.Simulations.Tests\bin\Debug\
+\Evolve2.Simulations.Tests\obj\Debug\
 /TestResults/

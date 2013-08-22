@@ -39,5 +39,10 @@ namespace Evolve2.Tests.Mocks
         {
             return x.CompareTo(y);
         }
+
+        public object Clone()
+        {
+            return new MockState(this.CurrentState);
+        }
     }
 }

@@ -38,5 +38,11 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
         {
             return true;
         }
+
+        public override object Clone()
+        {
+            EnumState cloned = new EnumState(this.CurrentState);
+            return cloned;
+        }
     }
 }

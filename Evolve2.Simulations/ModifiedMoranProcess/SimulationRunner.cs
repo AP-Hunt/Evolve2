@@ -34,7 +34,7 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
             {
                 Graph<TIdent> repGraph = (Graph<TIdent>)G.Clone();
                 
-                int iter = 0;
+                int iter = 1;
                 while(iter < Iterations && !graphFixated(repGraph) && !graphExtinct(repGraph))
                 {
                     IEnumerable<TIdent> targetState = _stateSelector.Select(repGraph, _random);
@@ -46,6 +46,11 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
                     StatefulVertex<TIdent, VertexState> vict = (StatefulVertex<TIdent, VertexState>)repGraph.FindVertex(victim);
 
                     vict.State.ChangeStateValue(vert.State.CurrentState);
+
+                    System.Diagnostics.Debug.WriteLine("{0} Mutants {1} Healthy",
+                                                        repGraph.Vertices.OfType<StatefulVertex<TIdent, VertexState>>().Count(v => v.State.CurrentState == VertexState.MUTANT),
+                                                        repGraph.Vertices.OfType<StatefulVertex<TIdent, VertexState>>().Count(v => v.State.CurrentState == VertexState.HEALTHY));
+
                     iter++;
                 }
 

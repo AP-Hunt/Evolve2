@@ -20,7 +20,6 @@ namespace Evolve2.State
         public abstract int CompareTo(IState<T> other);
         public abstract bool ChangeStateValue(T NewStateValue);
         public abstract bool StateChangeIsValid(T NewStateValue);
-
-
+        public abstract object Clone();
     }
 }

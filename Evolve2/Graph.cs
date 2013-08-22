@@ -18,7 +18,7 @@ namespace Evolve2
             _subGraphEdges = new Dictionary<T, List<SubgraphEdge<T>>>();
         }
 
-        internal Dictionary<T, Vertex<T>> _vertices;
+        protected internal Dictionary<T, Vertex<T>> _vertices;
         public IEnumerable<Vertex<T>> Vertices
         {
             get
@@ -43,7 +43,7 @@ namespace Evolve2
             return _vertices[Identity];
         }
 
-        internal ICollection<Edge<T>> _edges;
+        protected internal ICollection<Edge<T>> _edges;
         public IEnumerable<Edge<T>> Edges
         {
             get
@@ -52,7 +52,7 @@ namespace Evolve2
             }
         }
 
-        internal Dictionary<T, Graph<T>> _subGraphs;
+        protected internal Dictionary<T, Graph<T>> _subGraphs;
         public IEnumerable<Graph<T>> Subgraphs
         {
             get
@@ -68,7 +68,7 @@ namespace Evolve2
             }
         }
 
-        internal Dictionary<T, List<SubgraphEdge<T>>> _subGraphEdges;
+        protected internal Dictionary<T, List<SubgraphEdge<T>>> _subGraphEdges;
         public IEnumerable<SubgraphEdge<T>> SubgraphEdgesForGraph(T GraphIdentity)
         {
             if (!_subGraphEdges.ContainsKey(GraphIdentity))
@@ -87,7 +87,7 @@ namespace Evolve2
             }
         }
 
-        internal bool hasVertex(T V)
+        protected internal bool hasVertex(T V)
         {
             return _vertices.ContainsKey(V);
         }

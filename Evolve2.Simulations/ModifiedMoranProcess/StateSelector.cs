@@ -22,7 +22,7 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
              */
             double R = 3.0d;
             int N = graph.Vertices.Count();
-            int m = graph.Vertices.OfType<StatefulVertex<Guid, VertexState>>().Count(v => v.State.CurrentState == VertexState.MUTANT);
+            int m = graph.Vertices.OfType<StatefulVertex<T, VertexState>>().Count(v => v.State.CurrentState == VertexState.MUTANT);
             double prMutant = ((R*m)/((R*m)+(N-m)));
             double pr = Random.NextDouble();
 

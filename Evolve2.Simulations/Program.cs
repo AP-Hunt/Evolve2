@@ -19,9 +19,9 @@ namespace Evolve2.Simulations
             List<StatefulVertex<Guid, Moran.VertexState>> vertices = new List<StatefulVertex<Guid, Moran.VertexState>>();
             for (int i = 0; i < 49; i++)
             {
-                vertices.Add(new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.HEALTHY, identProv));
+                vertices.Add(new StatefulVertex<Guid, Moran.VertexState>(new Moran.EnumState(Moran.VertexState.HEALTHY), identProv));
             }
-            vertices.Add(new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.MUTANT, identProv));
+            vertices.Add(new StatefulVertex<Guid, Moran.VertexState>(new Moran.EnumState(Moran.VertexState.MUTANT), identProv));
 
             for (int i = 0; i <= 49; i++)
             {
@@ -35,7 +35,7 @@ namespace Evolve2.Simulations
             }
 
             Moran.SimulationRunner runner = new Moran.SimulationRunner(new Moran.StateSelector(), new Moran.VertexSelector(), new Moran.VictimSelector());
-            Moran.SimulationResult result = runner.RunOn(superGraph, 50, 1000);
+            Moran.SimulationResult result = runner.RunOn(superGraph, 100, 10000);
 
             Console.WriteLine("Result");
             Console.WriteLine("\t Reps " + result.RepetitionsPerformed);
