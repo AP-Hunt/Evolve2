@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolve2
+namespace Evolve2.Simulations.ModifiedMoranProcess
 {
     public interface IStateSelector
     {
-        IEnumerable<T> Select<T>(Graph<T> graph, Random Random) where T : struct;
+        IEnumerable<TIdent> Select<TIdent>(Graph<TIdent> graph, Random Random) where TIdent : struct;
     }
 }

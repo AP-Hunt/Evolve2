@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolve2.Simulation
+namespace Evolve2.Simulations.ModifiedMoranProcess
 {
     public class SimulationRunner
     {
@@ -33,7 +33,7 @@ namespace Evolve2.Simulation
             for (int rep = 0; rep <= Repetitions; rep++)
             {
                 Graph<TIdent> repGraph = (Graph<TIdent>)G.Clone();
-                Console.WriteLine("Starting with {0} health and {1} mutant", repGraph.Vertices.Count(v => v.State == States.HEALTHY), repGraph.Vertices.Count(v => v.State == States.MUTANT));
+                
                 int iter = 0;
                 while(iter < Iterations && !graphFixated(repGraph) && !graphExtinct(repGraph))
                 {
@@ -42,14 +42,11 @@ namespace Evolve2.Simulation
                     IEnumerable<TIdent> destinationVertices = repGraph.VerticesConnectedToVertex(vertex); 
                     TIdent victim = _victimSelector.Select(destinationVertices, repGraph, _random);
 
-                    Vertex<TIdent> vert = repGraph.FindVertex(vertex);
-                    Vertex<TIdent> vict = repGraph.FindVertex(victim);
+                    StatefulVertex<TIdent, VertexState> vert = (StatefulVertex<TIdent, VertexState>)repGraph.FindVertex(vertex);
+                    StatefulVertex<TIdent, VertexState> vict = (StatefulVertex<TIdent, VertexState>)repGraph.FindVertex(victim);
 
-                    vict.SwitchState(vert.State);
-
+                    vict.State.ChangeStateValue(vert.State.CurrentState);
                     iter++;
-
-                    System.Diagnostics.Debug.WriteLine("Ending iteration with {0} healthy and {1} mutant", repGraph.Vertices.Count(v => v.State == States.HEALTHY), repGraph.Vertices.Count(v => v.State == States.MUTANT));
                 }
 
                 if (!graphFixated(repGraph) && !graphExtinct(repGraph))
@@ -76,12 +73,12 @@ namespace Evolve2.Simulation
 
         private bool graphFixated<T>(Graph<T> G) where T : struct
         {
-            return G.Vertices.All(v => v.State == States.MUTANT);
+            return G.Vertices.OfType<StatefulVertex<Guid, VertexState>>().All(v => v.State.CurrentState == VertexState.MUTANT);
         }
 
         private bool graphExtinct<T>(Graph<T> G) where T : struct
         {
-            return G.Vertices.All(v => v.State == States.HEALTHY);
+            return G.Vertices.OfType<StatefulVertex<Guid, VertexState>>().All(v => v.State.CurrentState == VertexState.HEALTHY);
         }
     }
 }

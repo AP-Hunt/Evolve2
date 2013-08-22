@@ -34,5 +34,10 @@ namespace Evolve2.Tests.Mocks
         {
             _state = InitialValue;
         }
+
+        public int Compare(State.IState<int> x, State.IState<int> y)
+        {
+            return x.CompareTo(y);
+        }
     }
 }

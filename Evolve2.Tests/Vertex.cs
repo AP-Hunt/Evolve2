@@ -3,11 +3,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Evolve2;
 using Evolve2.Util;
 using Evolve2.Tests.Mocks;
+using Evolve2.Simulations;
+using Moran = Evolve2.Simulations.ModifiedMoranProcess;
 
-namespace Evolve2.Tests
+namespace Evolve2.Simulations.Tests
 {
     [TestClass]
-    public class Vertex
+    public class StatefulVertex
     {
         private MockGuidIdentityProvider guidProvider;
 
@@ -24,70 +26,63 @@ namespace Evolve2.Tests
         }
 
         [TestMethod]
-        public void State_HealthyByDefault()
-        {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider);
-            Assert.AreEqual<States>(v.State, States.HEALTHY);
-        }
-
-        [TestMethod]
         public void State_HealthyBySetting()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider, States.HEALTHY);
-            Assert.AreEqual<States>(v.State, States.HEALTHY);
+            StatefulVertex<Guid, Moran.VertexState> v = new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.HEALTHY, guidProvider);
+            Assert.AreEqual<Moran.VertexState>(v.State.CurrentState, Moran.VertexState.HEALTHY);
         }
 
         [TestMethod]
         public void State_MutantBySetting()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider, States.MUTANT);
-            Assert.AreEqual<States>(v.State, States.MUTANT);
+            StatefulVertex<Guid, Moran.VertexState> v = new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.MUTANT, guidProvider);
+            Assert.AreEqual<Moran.VertexState>(v.State.CurrentState, Moran.VertexState.MUTANT);
         }
 
         [TestMethod]
         public void SwitchState_MutantToHealthy()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider, States.MUTANT);
+            StatefulVertex<Guid, Moran.VertexState> v = new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.MUTANT, guidProvider);
 
-            Assert.AreEqual<States>(v.State, States.MUTANT);
-            v.SwitchState(States.HEALTHY);
-            Assert.AreEqual<States>(v.State, States.HEALTHY);
+            Assert.AreEqual<Moran.VertexState>(v.State.CurrentState, Moran.VertexState.MUTANT);
+            v.State.ChangeStateValue(Moran.VertexState.HEALTHY);
+            Assert.AreEqual<Moran.VertexState>(v.State.CurrentState, Moran.VertexState.HEALTHY);
         }
 
         [TestMethod]
         public void SwitchState_HealthyToMutant()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider, States.HEALTHY);
+            StatefulVertex<Guid, Moran.VertexState> v = new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.HEALTHY, guidProvider);
 
-            Assert.AreEqual<States>(v.State, States.HEALTHY);
-            v.SwitchState(States.MUTANT);
-            Assert.AreEqual<States>(v.State, States.MUTANT);
+            Assert.AreEqual<Moran.VertexState>(v.State.CurrentState, Moran.VertexState.HEALTHY);
+            v.State.ChangeStateValue(Moran.VertexState.MUTANT);
+            Assert.AreEqual<Moran.VertexState>(v.State.CurrentState, Moran.VertexState.MUTANT);
         }
 
         [TestMethod]
         public void Clone_ObjectReferencesNotEqual()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider);
-            Vertex<Guid> v2 = (Vertex<Guid>)v.Clone();
+            StatefulVertex<Guid, Moran.VertexState> v = new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.HEALTHY, guidProvider);
+            StatefulVertex<Guid, Moran.VertexState> v2 = (StatefulVertex<Guid, Moran.VertexState>)v.Clone();
 
             Assert.AreNotSame(v2, v);
             Assert.AreNotEqual(v2, v);
         }
 
         [TestMethod]
-        public void Clone_StatesClonedCorrectly()
+        public void Clone_StateClonedCorrectly()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider);
-            Vertex<Guid> v2 = (Vertex<Guid>)v.Clone();
+            StatefulVertex<Guid, Moran.VertexState> v = new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.HEALTHY, guidProvider);
+            StatefulVertex<Guid, Moran.VertexState> v2 = (StatefulVertex<Guid, Moran.VertexState>)v.Clone();
 
-            Assert.AreEqual<States>(v.State, v2.State);
+            Assert.AreEqual<Moran.VertexState>(v.State.CurrentState, v2.State.CurrentState);
         }
 
         [TestMethod]
         public void Clone_IdentityClonedCorrectly()
         {
-            Vertex<Guid> v = new Vertex<Guid>(guidProvider);
-            Vertex<Guid> v2 = (Vertex<Guid>)v.Clone();
+            StatefulVertex<Guid, Moran.VertexState> v = new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.HEALTHY, guidProvider);
+            StatefulVertex<Guid, Moran.VertexState> v2 = (StatefulVertex<Guid, Moran.VertexState>)v.Clone();
 
             Assert.AreEqual<Guid>(v.Identity, v2.Identity);
             Assert.AreNotSame(v.Identity, v2.Identity);

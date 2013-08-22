@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{55C09E13-E19B-4253-82B0-1F356D8746A9}</ProjectGuid>
+    <ProjectGuid>{580E4027-E35F-4DD7-8EBD-AA5D1F85BA01}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Evolve2</RootNamespace>
-    <AssemblyName>Evolve2</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Evolve2.Simulations</RootNamespace>
+    <AssemblyName>Evolve2.Simulations</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,16 +22,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,22 +39,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Edge.cs" />
-    <Compile Include="Graph.cs" />
-    <Compile Include="GraphElement.cs" />
-    <Compile Include="State\IStateful.cs" />
+    <Compile Include="ModifiedMoranProcess\EnumState.cs" />
+    <Compile Include="ModifiedMoranProcess\IStateSelector.cs" />
+    <Compile Include="ModifiedMoranProcess\IVertexSelector.cs" />
+    <Compile Include="ModifiedMoranProcess\IVictimSelector.cs" />
+    <Compile Include="ModifiedMoranProcess\VertexState.cs" />
+    <Compile Include="ModifiedMoranProcess\StatefulVertex.cs" />
+    <Compile Include="ModifiedMoranProcess\StateSelector.cs" />
+    <Compile Include="ModifiedMoranProcess\VertexSelector.cs" />
+    <Compile Include="ModifiedMoranProcess\VictimSelector.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="State\IState.cs" />
-    <Compile Include="State\StateBase.cs" />
-    <Compile Include="Util\GuidIdentityProvider.cs" />
-    <Compile Include="Util\IdentityProvider.cs" />
-    <Compile Include="Util\RandomProvider.cs" />
-    <Compile Include="Vertex.cs" />
+    <Compile Include="ModifiedMoranProcess\SimulationResult.cs" />
+    <Compile Include="ModifiedMoranProcess\SimulationRunner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\Evolve2\Evolve2.csproj">
+      <Project>{55c09e13-e19b-4253-82b0-1f356d8746a9}</Project>
+      <Name>Evolve2</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

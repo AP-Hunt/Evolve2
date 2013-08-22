@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolve2
+namespace Evolve2.Simulations.ModifiedMoranProcess
 {
     public class VertexSelector : IVertexSelector
     {

@@ -1,11 +1,12 @@
-﻿using Evolve2.Simulation;
+﻿using Evolve2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moran = Evolve2.Simulations.ModifiedMoranProcess;
 
-namespace Evolve2
+namespace Evolve2.Simulations
 {
     class Program
     {
@@ -15,17 +16,17 @@ namespace Evolve2
             Graph<Guid> superGraph = new Graph<Guid>(identProv);
 
 
-            List<Vertex<Guid>> vertices = new List<Vertex<Guid>>();
+            List<StatefulVertex<Guid, Moran.VertexState>> vertices = new List<StatefulVertex<Guid, Moran.VertexState>>();
             for (int i = 0; i < 49; i++)
             {
-                vertices.Add(new Vertex<Guid>(identProv));
+                vertices.Add(new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.HEALTHY, identProv));
             }
-            vertices.Add(new Vertex<Guid>(identProv, States.MUTANT));
+            vertices.Add(new StatefulVertex<Guid, Moran.VertexState>(Moran.VertexState.MUTANT, identProv));
 
             for (int i = 0; i <= 49; i++)
             {
-                Vertex<Guid> v1 = vertices[i];
-                List<Vertex<Guid>> remaining = vertices.Skip(i+1).ToList();
+                StatefulVertex<Guid, Moran.VertexState> v1 = vertices[i];
+                List<StatefulVertex<Guid, Moran.VertexState>> remaining = vertices.Skip(i + 1).ToList();
 
                 foreach (Vertex<Guid> v2 in remaining)
                 {
@@ -33,8 +34,8 @@ namespace Evolve2
                 }
             }
 
-            SimulationRunner runner = new SimulationRunner(new StateSelector(), new VertexSelector(), new VictimSelector());
-            SimulationResult result = runner.RunOn(superGraph, 50, 1000);
+            Moran.SimulationRunner runner = new Moran.SimulationRunner(new Moran.StateSelector(), new Moran.VertexSelector(), new Moran.VictimSelector());
+            Moran.SimulationResult result = runner.RunOn(superGraph, 50, 1000);
 
             Console.WriteLine("Result");
             Console.WriteLine("\t Reps " + result.RepetitionsPerformed);

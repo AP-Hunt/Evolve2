@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Evolve2.Simulation
+namespace Evolve2.Simulations.ModifiedMoranProcess
 {
     public class SimulationResult
     {

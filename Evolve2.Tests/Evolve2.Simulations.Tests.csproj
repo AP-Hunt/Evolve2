@@ -53,12 +53,15 @@
     <Compile Include="GraphElement.cs" />
     <Compile Include="Mocks\MockGuidIdentityProvider.cs" />
     <Compile Include="Mocks\MockState.cs" />
-    <Compile Include="Mocks\MockStateProvider.cs" />
     <Compile Include="Util\GuidIdentityProvider.cs" />
     <Compile Include="Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Evolve2.Simulations\Evolve2.Simulations.csproj">
+      <Project>{580e4027-e35f-4dd7-8ebd-aa5d1f85ba01}</Project>
+      <Name>Evolve2.Simulations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Evolve2\Evolve2.csproj">
       <Project>{55c09e13-e19b-4253-82b0-1f356d8746a9}</Project>
       <Name>Evolve2</Name>

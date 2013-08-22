@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Evolve2.State
 {
     public abstract class StateBase<T> : IState<T>
+        where T : struct
     {
         public T CurrentState { get; set; }
 
@@ -15,8 +16,11 @@ namespace Evolve2.State
             CurrentState = InitialValue;
         }
 
+        public abstract int Compare(IState<T> x, IState<T> y);
         public abstract int CompareTo(IState<T> other);
         public abstract bool ChangeStateValue(T NewStateValue);
         public abstract bool StateChangeIsValid(T NewStateValue);
+
+
     }
 }

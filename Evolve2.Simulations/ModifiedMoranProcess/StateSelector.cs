@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evolve2
+namespace Evolve2.Simulations.ModifiedMoranProcess
 {
     public class StateSelector : IStateSelector
     {
@@ -22,17 +22,17 @@ namespace Evolve2
              */
             double R = 3.0d;
             int N = graph.Vertices.Count();
-            int m = graph.Vertices.Count(v => v.State == States.MUTANT);
+            int m = graph.Vertices.OfType<StatefulVertex<Guid, VertexState>>().Count(v => v.State.CurrentState == VertexState.MUTANT);
             double prMutant = ((R*m)/((R*m)+(N-m)));
             double pr = Random.NextDouble();
 
             if (pr <= prMutant)
             {
-                return graph.Vertices.Where(v => v.State == States.MUTANT).Select(v => v.Identity);
+                return graph.Vertices.OfType<StatefulVertex<T, VertexState>>().Where(v => v.State.CurrentState == VertexState.MUTANT).Select(v => v.Identity);
             }
             else
             {
-                return graph.Vertices.Where(v => v.State == States.HEALTHY).Select(v => v.Identity);
+                return graph.Vertices.OfType<StatefulVertex<T, VertexState>>().Where(v => v.State.CurrentState == VertexState.HEALTHY).Select(v => v.Identity);
             }
         }
     }
