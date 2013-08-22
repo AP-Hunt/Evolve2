@@ -1,0 +1,9 @@
+W:\My Documents\GitHub\Evolve2\Evolve2.Tests\obj\Debug\Evolve2.Tests.dll
+W:\My Documents\GitHub\Evolve2\Evolve2.Tests\obj\Debug\Evolve2.Simulations.Tests.csprojResolveAssemblyReference.cache
+W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.Tests.dll
+W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.Tests.pdb
+W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.dll
+W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.Simulations.dll
+W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.Simulations.pdb
+W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.pdb
+W:\My Documents\GitHub\Evolve2\Evolve2.Tests\obj\Debug\Evolve2.Tests.pdb
