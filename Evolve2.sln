@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve2", "Evolve2\Evolve2.csproj", "{55C09E13-E19B-4253-82B0-1F356D8746A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve2.Simulations.Tests", "Evolve2.Tests\Evolve2.Simulations.Tests.csproj", "{20BA005C-87CC-4E1E-A980-9C383680ECF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve2.Simulations.Tests", "Evolve2.Simulations.Tests\Evolve2.Simulations.Tests.csproj", "{20BA005C-87CC-4E1E-A980-9C383680ECF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve2.Simulations", "Evolve2.Simulations\Evolve2.Simulations.csproj", "{580E4027-E35F-4DD7-8EBD-AA5D1F85BA01}"
 EndProject
