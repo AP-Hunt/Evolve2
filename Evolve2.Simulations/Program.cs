@@ -13,8 +13,7 @@ namespace Evolve2.Simulations
         static void Main(string[] args)
         {
             Util.IIdentityProvider<Guid> identProv = new Util.DefaultIdentityProvider();
-            Graph<Guid> superGraph = new Graph<Guid>(identProv);
-
+            Graph<Guid> graph = new Graph<Guid>(identProv);
 
             List<StatefulVertex<Guid, Moran.VertexState>> vertices = new List<StatefulVertex<Guid, Moran.VertexState>>();
             for (int i = 0; i < 49; i++)
@@ -30,12 +29,12 @@ namespace Evolve2.Simulations
 
                 foreach (Vertex<Guid> v2 in remaining)
                 {
-                    superGraph.AddEdge(new Edge<Guid>(v1, v2, identProv), false);
+                    graph.AddEdge(new Edge<Guid>(v1, v2, identProv), false);
                 }
             }
 
             Moran.SimulationRunner runner = new Moran.SimulationRunner(new Moran.StateSelector(), new Moran.VertexSelector(), new Moran.VictimSelector());
-            Moran.SimulationResult result = runner.RunOn(superGraph, 100, 10000);
+            Moran.SimulationResult result = runner.RunOn(graph, 100, 10000, 3.0d);
 
             Console.WriteLine("Result");
             Console.WriteLine("\t Reps " + result.RepetitionsPerformed);
