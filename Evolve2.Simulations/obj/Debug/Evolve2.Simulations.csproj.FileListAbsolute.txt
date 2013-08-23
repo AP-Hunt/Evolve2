@@ -1,7 +1,0 @@
-W:\My Documents\GitHub\Evolve2\Evolve2.Simulations\bin\Debug\Evolve2.Simulations.dll
-W:\My Documents\GitHub\Evolve2\Evolve2.Simulations\bin\Debug\Evolve2.Simulations.pdb
-W:\My Documents\GitHub\Evolve2\Evolve2.Simulations\bin\Debug\Evolve2.pdb
-W:\My Documents\GitHub\Evolve2\Evolve2.Simulations\obj\Debug\Evolve2.Simulations.csprojResolveAssemblyReference.cache
-W:\My Documents\GitHub\Evolve2\Evolve2.Simulations\obj\Debug\Evolve2.Simulations.dll
-W:\My Documents\GitHub\Evolve2\Evolve2.Simulations\obj\Debug\Evolve2.Simulations.pdb
-W:\My Documents\GitHub\Evolve2\Evolve2.Simulations\bin\Debug\Evolve2.dll

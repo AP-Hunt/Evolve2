@@ -1,7 +1,0 @@
-W:\My Documents\GitHub\Evolve2\Evolve2.Tests\obj\Debug\Evolve2.Tests.csprojResolveAssemblyReference.cache
-W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.Tests.dll
-W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.Tests.pdb
-W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.exe
-W:\My Documents\GitHub\Evolve2\Evolve2.Tests\bin\Debug\Evolve2.pdb
-W:\My Documents\GitHub\Evolve2\Evolve2.Tests\obj\Debug\Evolve2.Tests.dll
-W:\My Documents\GitHub\Evolve2\Evolve2.Tests\obj\Debug\Evolve2.Tests.pdb
