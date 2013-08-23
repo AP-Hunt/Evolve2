@@ -8,6 +8,7 @@ namespace Evolve2.GraphTypeHelpers
 {
     // Not a particularly useful class, but its here to meet convention with the other helpers
     public class CliqueInfo<T> : GraphConstructInfo<T>
+        where T : struct
     {
         public CliqueInfo(Graph<T> ConstructedGraph)
             : base(ConstructedGraph)
