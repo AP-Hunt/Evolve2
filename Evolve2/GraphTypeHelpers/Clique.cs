@@ -39,7 +39,7 @@ namespace Evolve2.GraphTypeHelpers
                 clique.AddVertex(v);
             }
 
-            for (int i = 0; i <= CliqueSize; i++)
+            for (int i = 0; i <= CliqueSize-1; i++)
             {
                 Vertex<T> v1 = vertices[i];
                 List<Vertex<T>> remaining = vertices.Skip(i + 1).ToList();
