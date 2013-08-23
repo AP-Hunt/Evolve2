@@ -22,7 +22,7 @@ namespace Evolve2.GraphTypeHelpers
             : base(VertexFactory, EdgeFactory, IdentityProvider)
         { }
 
-        public Graph<T> Create(int ChainLength, bool Directed)
+        public ChainInfo<T> Create(int ChainLength, bool Directed)
         {
             if (ChainLength < 2)
             {
@@ -38,18 +38,33 @@ namespace Evolve2.GraphTypeHelpers
                 Vertex<T> v = this.VertexFactory.NewVertex(this.IdentityProvider);
                 vertices.Add(v);
                 chain.AddVertex(v);
+
+                System.Diagnostics.Debug.WriteLine(v.Identity);
             }
 
             //Add edges between (0, 1), (1, 2), ..., (N-1, N)
-            int k = ChainLength-1;
-            for (int i = 0; i < k - 2; i++)
+            ChainPart<T> startOfChain = new ChainPart<T>(vertices[0]);
+            ChainPart<T> currentPart = startOfChain;
+            int highestIndex = vertices.Count() - 1;
+            for (int i = 0; i <= highestIndex - 1; i++)
             {
                 Vertex<T> src = vertices[i];
                 Vertex<T> dest = vertices[i + 1];
                 chain.AddEdge(this.EdgeFactory.NewEdge(src, dest, this.IdentityProvider), Directed);
+
+                //Get the current and next bit of the chain
+                ChainPart<T> nextPart = new ChainPart<T>(dest);
+                currentPart.NextVertex = nextPart;
+
+                //Set up for the next part
+                currentPart = nextPart;
             }
 
-            return chain;
+            //After linking them all, ensure the next part is null
+            currentPart.NextVertex = null;
+
+            ChainInfo<T> chainInfo = new ChainInfo<T>(chain, startOfChain);
+            return chainInfo;
         }
     }
 }

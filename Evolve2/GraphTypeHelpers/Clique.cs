@@ -22,7 +22,7 @@ namespace Evolve2.GraphTypeHelpers
             : base(VertexFactory, EdgeFactory, IdentityProvider)
         { }
 
-        public Graph<T> Create(int CliqueSize)
+        public CliqueInfo<T> Create(int CliqueSize)
         {
             if (CliqueSize < 2)
             {
@@ -50,7 +50,7 @@ namespace Evolve2.GraphTypeHelpers
                 }
             }
 
-            return clique;
+            return new CliqueInfo<T>(clique);
         }
     }
 }

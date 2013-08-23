@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Evolve2.GraphTypeHelpers
+{
+    // Not a particularly useful class, but its here to meet convention with the other helpers
+    public class CliqueInfo<T> : GraphConstructInfo<T>
+    {
+        public CliqueInfo(Graph<T> ConstructedGraph)
+            : base(ConstructedGraph)
+        { }
+    }
+}

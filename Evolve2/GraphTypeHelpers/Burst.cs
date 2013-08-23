@@ -22,7 +22,7 @@ namespace Evolve2.GraphTypeHelpers
             : base(VertexFactory, EdgeFactory, IdentityProvider)
         { }
 
-        public Graph<T> Create(int BurstSize, bool Directed)
+        public BurstInfo<T> Create(int BurstSize, bool Directed)
         {
             if (BurstSize < 2)
             {
@@ -40,7 +40,9 @@ namespace Evolve2.GraphTypeHelpers
                 burst.AddVertex(v);
                 burst.AddEdge(this.EdgeFactory.NewEdge(centre, v, this.IdentityProvider), Directed);
             }
-            return burst;
+
+            BurstInfo<T> burstInfo = new BurstInfo<T>(burst, centre);
+            return burstInfo;
         }
     }
 }
