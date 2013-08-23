@@ -30,11 +30,11 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
             SimulationResult result = new SimulationResult();
             result.RepetitionsPerformed = Repetitions;
 
-            for (int rep = 0; rep <= Repetitions; rep++)
+            for (int rep = 0; rep < Repetitions; rep++)
             {
                 Graph<TIdent> repGraph = (Graph<TIdent>)G.Clone();
                 
-                int iter = 1;
+                int iter = 0;
                 while(iter < Iterations && !graphFixated(repGraph) && !graphExtinct(repGraph))
                 {
                     IEnumerable<TIdent> targetState = _stateSelector.Select(repGraph, _random, MutantWeight);
