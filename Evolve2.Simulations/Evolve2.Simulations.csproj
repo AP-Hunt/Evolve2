@@ -53,8 +53,8 @@
     <Compile Include="ModifiedMoranProcess\VertexSelector.cs" />
     <Compile Include="ModifiedMoranProcess\VictimSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ModifiedMoranProcess\SimulationResult.cs" />
-    <Compile Include="ModifiedMoranProcess\SimulationRunner.cs" />
+    <Compile Include="ModifiedMoranProcess\MoranProcessResult.cs" />
+    <Compile Include="ModifiedMoranProcess\MoranProcessRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Evolve2\Evolve2.csproj">

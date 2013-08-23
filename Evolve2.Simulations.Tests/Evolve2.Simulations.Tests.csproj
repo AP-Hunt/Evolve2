@@ -50,11 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="GraphElement.cs" />
-    <Compile Include="Mocks\MockGuidIdentityProvider.cs" />
-    <Compile Include="Mocks\MockState.cs" />
-    <Compile Include="Util\GuidIdentityProvider.cs" />
-    <Compile Include="Vertex.cs" />
+    <Compile Include="ModifiedMoranProcess\VerificationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
