@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Evolve2.Simulations.ModifiedMoranProcess
 {
-    public class SimulationResult
+    public class MoranProcessResult
     {
         public int RepetitionsPerformed { get; set; }
 

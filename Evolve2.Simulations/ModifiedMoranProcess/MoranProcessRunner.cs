@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Evolve2.Simulations.ModifiedMoranProcess
 {
-    public class SimulationRunner
+    public class MoranProcessRunner
     {
         private IStateSelector _stateSelector;
         private IVertexSelector _vertexSelector;
         private IVictimSelector _victimSelector;
         private Random _random;
 
-        public SimulationRunner(IStateSelector StateSelector, IVertexSelector VertexSelector, IVictimSelector VictimSelector) :
+        public MoranProcessRunner(IStateSelector StateSelector, IVertexSelector VertexSelector, IVictimSelector VictimSelector) :
             this(StateSelector, VertexSelector, VictimSelector, Util.RandomProvider.Random)
         { }
-        public SimulationRunner(IStateSelector StateSelector, IVertexSelector VertexSelector, IVictimSelector VictimSelector, Random Random)
+        public MoranProcessRunner(IStateSelector StateSelector, IVertexSelector VertexSelector, IVictimSelector VictimSelector, Random Random)
         {
             _stateSelector = StateSelector;
             _vertexSelector = VertexSelector;
@@ -24,10 +24,10 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
             _random = Random;
         }
 
-        public SimulationResult RunOn<TIdent>(Graph<TIdent> G, int Repetitions, int Iterations, double MutantWeight)
+        public MoranProcessResult RunOn<TIdent>(Graph<TIdent> G, int Repetitions, int Iterations, double MutantWeight)
             where TIdent : struct
         {
-            SimulationResult result = new SimulationResult();
+            MoranProcessResult result = new MoranProcessResult();
             result.RepetitionsPerformed = Repetitions;
 
             for (int rep = 0; rep < Repetitions; rep++)
@@ -46,11 +46,6 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
                     StatefulVertex<TIdent, VertexState> vict = (StatefulVertex<TIdent, VertexState>)repGraph.FindVertex(victim);
 
                     vict.State.ChangeStateValue(vert.State.CurrentState);
-
-                    System.Diagnostics.Debug.WriteLine("{0} Mutants {1} Healthy",
-                                                        repGraph.Vertices.OfType<StatefulVertex<TIdent, VertexState>>().Count(v => v.State.CurrentState == VertexState.MUTANT),
-                                                        repGraph.Vertices.OfType<StatefulVertex<TIdent, VertexState>>().Count(v => v.State.CurrentState == VertexState.HEALTHY));
-
                     iter++;
                 }
 
@@ -69,8 +64,6 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
                         result.Extinctions++;
                     }
                 }
-
-                System.Diagnostics.Debug.WriteLine("-----------------------------------------");
             }
 
             return result;
