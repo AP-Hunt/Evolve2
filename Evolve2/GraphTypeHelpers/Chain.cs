@@ -15,27 +15,27 @@ namespace Evolve2.GraphTypeHelpers
         { }
     }
 
-    public class Chain<T> : GraphTypeHelper<T>
-        where T : struct
+    public class Chain<TIdentity> : GraphTypeHelper<TIdentity>
+        where TIdentity : struct
     {
-        public Chain(IVertexFactory<T> VertexFactory, IEdgeFactory<T> EdgeFactory, IIdentityProvider<T> IdentityProvider)
+        public Chain(IVertexFactory<TIdentity> VertexFactory, IEdgeFactory<TIdentity> EdgeFactory, IIdentityProvider<TIdentity> IdentityProvider)
             : base(VertexFactory, EdgeFactory, IdentityProvider)
         { }
 
-        public ChainInfo<T> Create(int ChainLength, bool Directed)
+        public ChainInfo<TIdentity> Create(int ChainLength, bool Directed)
         {
             if (ChainLength < 2)
             {
                 throw new ArgumentOutOfRangeException("ChainLength", "Chain length must be 2 or greater");
             }
 
-            Graph<T> chain = new Graph<T>(this.IdentityProvider);
+            Graph<TIdentity> chain = new Graph<TIdentity>(this.IdentityProvider);
 
             //Create vertices
-            List<Vertex<T>> vertices = new List<Vertex<T>>();
+            List<Vertex<TIdentity>> vertices = new List<Vertex<TIdentity>>();
             for (int i = 0; i < ChainLength; i++)
             {
-                Vertex<T> v = this.VertexFactory.NewVertex(this.IdentityProvider);
+                Vertex<TIdentity> v = this.VertexFactory.NewVertex(this.IdentityProvider);
                 vertices.Add(v);
                 chain.AddVertex(v);
 
@@ -43,17 +43,17 @@ namespace Evolve2.GraphTypeHelpers
             }
 
             //Add edges between (0, 1), (1, 2), ..., (N-1, N)
-            ChainPart<T> startOfChain = new ChainPart<T>(vertices[0]);
-            ChainPart<T> currentPart = startOfChain;
+            ChainPart<TIdentity> startOfChain = new ChainPart<TIdentity>(vertices[0]);
+            ChainPart<TIdentity> currentPart = startOfChain;
             int highestIndex = vertices.Count() - 1;
             for (int i = 0; i <= highestIndex - 1; i++)
             {
-                Vertex<T> src = vertices[i];
-                Vertex<T> dest = vertices[i + 1];
+                Vertex<TIdentity> src = vertices[i];
+                Vertex<TIdentity> dest = vertices[i + 1];
                 chain.AddEdge(this.EdgeFactory.NewEdge(src, dest, this.IdentityProvider), Directed);
 
                 //Get the current and next bit of the chain
-                ChainPart<T> nextPart = new ChainPart<T>(dest);
+                ChainPart<TIdentity> nextPart = new ChainPart<TIdentity>(dest);
                 currentPart.NextVertex = nextPart;
 
                 //Set up for the next part
@@ -63,7 +63,7 @@ namespace Evolve2.GraphTypeHelpers
             //After linking them all, ensure the next part is null
             currentPart.NextVertex = null;
 
-            ChainInfo<T> chainInfo = new ChainInfo<T>(chain, startOfChain);
+            ChainInfo<TIdentity> chainInfo = new ChainInfo<TIdentity>(chain, startOfChain);
             return chainInfo;
         }
     }

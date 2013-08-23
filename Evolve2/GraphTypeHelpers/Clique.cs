@@ -15,42 +15,42 @@ namespace Evolve2.GraphTypeHelpers
         { }
     }
 
-    public class Clique<T> : GraphTypeHelper<T>
-        where T : struct
+    public class Clique<TIdentity> : GraphTypeHelper<TIdentity>
+        where TIdentity : struct
     {
-        public Clique(IVertexFactory<T> VertexFactory, IEdgeFactory<T> EdgeFactory, IIdentityProvider<T> IdentityProvider)
+        public Clique(IVertexFactory<TIdentity> VertexFactory, IEdgeFactory<TIdentity> EdgeFactory, IIdentityProvider<TIdentity> IdentityProvider)
             : base(VertexFactory, EdgeFactory, IdentityProvider)
         { }
 
-        public CliqueInfo<T> Create(int CliqueSize)
+        public CliqueInfo<TIdentity> Create(int CliqueSize)
         {
             if (CliqueSize < 2)
             {
                 throw new ArgumentOutOfRangeException("CliqueSize", "Clique size must be at least 2");
             }
 
-            Graph<T> clique = new Graph<T>(this.IdentityProvider);
+            Graph<TIdentity> clique = new Graph<TIdentity>(this.IdentityProvider);
 
-            List<Vertex<T>> vertices = new List<Vertex<T>>();
+            List<Vertex<TIdentity>> vertices = new List<Vertex<TIdentity>>();
             for (int i = 0; i < CliqueSize; i++)
             {
-                Vertex<T> v = this.VertexFactory.NewVertex(this.IdentityProvider);
+                Vertex<TIdentity> v = this.VertexFactory.NewVertex(this.IdentityProvider);
                 vertices.Add(v);
                 clique.AddVertex(v);
             }
 
             for (int i = 0; i <= CliqueSize-1; i++)
             {
-                Vertex<T> v1 = vertices[i];
-                List<Vertex<T>> remaining = vertices.Skip(i + 1).ToList();
+                Vertex<TIdentity> v1 = vertices[i];
+                List<Vertex<TIdentity>> remaining = vertices.Skip(i + 1).ToList();
 
-                foreach (Vertex<T> v2 in remaining)
+                foreach (Vertex<TIdentity> v2 in remaining)
                 {
                     clique.AddEdge(this.EdgeFactory.NewEdge(v1, v2, this.IdentityProvider), false);
                 }
             }
 
-            return new CliqueInfo<T>(clique);
+            return new CliqueInfo<TIdentity>(clique);
         }
     }
 }

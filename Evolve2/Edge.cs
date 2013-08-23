@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Evolve2
 {
-    public class Edge<T> : GraphElement<T>, ICloneable
-        where T : struct
+    public class Edge<TIdentity> : GraphElement<TIdentity>, ICloneable
+        where TIdentity : struct
     {
-        internal Vertex<T> _source;
-        internal Vertex<T> _destination;
-        public T Source { get; private set; }
-        public virtual T Destination { get; private set; }
-        public Edge(Vertex<T> Source, Vertex<T> Destination, Util.IIdentityProvider<T> IdentityProvider) : base(IdentityProvider)
+        internal Vertex<TIdentity> _source;
+        internal Vertex<TIdentity> _destination;
+        public TIdentity Source { get; private set; }
+        public virtual TIdentity Destination { get; private set; }
+        public Edge(Vertex<TIdentity> Source, Vertex<TIdentity> Destination, Util.IIdentityProvider<TIdentity> IdentityProvider) : base(IdentityProvider)
         {
             this.Source = Source.Identity;
             this.Destination = Destination.Identity;
@@ -24,14 +24,14 @@ namespace Evolve2
 
         public object Clone()
         {
-            return new Edge<T>((Vertex<T>)_source.Clone(), (Vertex<T>)_destination.Clone(), _identProvider);
+            return new Edge<TIdentity>((Vertex<TIdentity>)_source.Clone(), (Vertex<TIdentity>)_destination.Clone(), _identProvider);
         }
     }
 
-    public class SubgraphEdge<T> : Edge<T>
-        where T : struct
+    public class SubgraphEdge<TIdentity> : Edge<TIdentity>
+        where TIdentity : struct
     {
-        public SubgraphEdge(Vertex<T> Source, Graph<T> G, Func<Graph<T>, Vertex<T>> VertexProducer, Util.IIdentityProvider<T> IdentityProvider)
+        public SubgraphEdge(Vertex<TIdentity> Source, Graph<TIdentity> G, Func<Graph<TIdentity>, Vertex<TIdentity>> VertexProducer, Util.IIdentityProvider<TIdentity> IdentityProvider)
             : base(Source, VertexProducer(G), IdentityProvider)
         { }
     }

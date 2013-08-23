@@ -9,12 +9,12 @@ namespace Evolve2
     /// <summary>
     /// Forms the base for all graph elements (graphs, edges, vertices) and provides an identity
     /// </summary>
-    /// <typeparam name="TIdent"></typeparam>
-    public abstract class GraphElement<TIdent> where TIdent : struct
+    /// <typeparam name="TIdentity"></typeparam>
+    public abstract class GraphElement<TIdentity> where TIdentity : struct
     {
-        protected TIdent _ident;
-        protected Util.IIdentityProvider<TIdent> _identProvider;
-        public TIdent Identity
+        protected TIdentity _ident;
+        protected Util.IIdentityProvider<TIdentity> _identProvider;
+        public TIdentity Identity
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Evolve2
             }
         }
 
-        public GraphElement(Util.IIdentityProvider<TIdent> IdentityProvider)
+        public GraphElement(Util.IIdentityProvider<TIdentity> IdentityProvider)
         {
             _ident = IdentityProvider.NewIdentity();
             _identProvider = IdentityProvider;

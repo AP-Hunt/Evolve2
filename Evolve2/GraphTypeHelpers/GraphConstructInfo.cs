@@ -7,11 +7,11 @@ using Evolve2.GraphTypeHelpers;
 
 namespace Evolve2.GraphTypeHelpers
 {
-    public class GraphConstructInfo<T>
-        where T : struct
+    public class GraphConstructInfo<TIdentity>
+        where TIdentity : struct
     {
-        internal protected Graph<T> _graph;
-        public Graph<T> Graph
+        internal protected Graph<TIdentity> _graph;
+        public Graph<TIdentity> Graph
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Evolve2.GraphTypeHelpers
             }
         }
 
-        protected GraphConstructInfo(Graph<T> ConstructedGraph)
+        protected GraphConstructInfo(Graph<TIdentity> ConstructedGraph)
         {
             _graph = ConstructedGraph;
         }

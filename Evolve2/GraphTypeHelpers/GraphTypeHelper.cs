@@ -8,14 +8,14 @@ using Evolve2.Util.Factories;
 
 namespace Evolve2.GraphTypeHelpers
 {
-    public class GraphTypeHelper<T>
-        where T : struct
+    public class GraphTypeHelper<TIdentity>
+        where TIdentity : struct
     {
-        protected IVertexFactory<T> VertexFactory { get; private set; }
-        protected IEdgeFactory<T> EdgeFactory { get; private set; }
-        protected IIdentityProvider<T> IdentityProvider { get; private set; }
+        protected IVertexFactory<TIdentity> VertexFactory { get; private set; }
+        protected IEdgeFactory<TIdentity> EdgeFactory { get; private set; }
+        protected IIdentityProvider<TIdentity> IdentityProvider { get; private set; }
 
-        public GraphTypeHelper(IVertexFactory<T> VertexFactory, IEdgeFactory<T> EdgeFactory, IIdentityProvider<T> IdentityProvider)
+        public GraphTypeHelper(IVertexFactory<TIdentity> VertexFactory, IEdgeFactory<TIdentity> EdgeFactory, IIdentityProvider<TIdentity> IdentityProvider)
         {
             if (VertexFactory == null)
             {

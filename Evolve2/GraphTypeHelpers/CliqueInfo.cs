@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace Evolve2.GraphTypeHelpers
 {
     // Not a particularly useful class, but its here to meet convention with the other helpers
-    public class CliqueInfo<T> : GraphConstructInfo<T>
-        where T : struct
+    public class CliqueInfo<TIdentity> : GraphConstructInfo<TIdentity>
+        where TIdentity : struct
     {
-        public CliqueInfo(Graph<T> ConstructedGraph)
+        public CliqueInfo(Graph<TIdentity> ConstructedGraph)
             : base(ConstructedGraph)
         { }
     }
