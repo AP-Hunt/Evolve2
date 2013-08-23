@@ -8,7 +8,6 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
     public class MoranProcessResult
     {
         public int RepetitionsPerformed { get; set; }
-
         public int Fixations { get; set; }
         public int Extinctions { get; set; }
         public int Timeout { get; set; }
