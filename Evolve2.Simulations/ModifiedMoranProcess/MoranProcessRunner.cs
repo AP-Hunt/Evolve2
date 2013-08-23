@@ -42,10 +42,16 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
                     IEnumerable<TIdent> destinationVertices = repGraph.VerticesConnectedToVertex(vertex); 
                     TIdent victim = _victimSelector.Select(destinationVertices, repGraph, _random);
 
-                    StatefulVertex<TIdent, VertexState> vert = (StatefulVertex<TIdent, VertexState>)repGraph.FindVertex(vertex);
-                    StatefulVertex<TIdent, VertexState> vict = (StatefulVertex<TIdent, VertexState>)repGraph.FindVertex(victim);
+                    //It's possible for there to be no victim.
+                    //Consider the end of a chain where there are no neighbours
+                    //No action should be taken, but it should still take up an iteration
+                    if(!default(TIdent).Equals(victim))
+                    {                  
+                        StatefulVertex<TIdent, VertexState> vert = (StatefulVertex<TIdent, VertexState>)repGraph.FindVertex(vertex);
+                        StatefulVertex<TIdent, VertexState> vict = (StatefulVertex<TIdent, VertexState>)repGraph.FindVertex(victim);
 
-                    vict.State.ChangeStateValue(vert.State.CurrentState);
+                        vict.State.ChangeStateValue(vert.State.CurrentState);
+                    }
                     iter++;
                 }
 

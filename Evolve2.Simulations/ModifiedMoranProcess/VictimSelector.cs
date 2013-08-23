@@ -12,8 +12,16 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
         {
             var vertList = Vertices.ToList(); //Force evaluation on the list, so we're not reevaluating later
             int N = vertList.Count();
-            int i = Random.Next(0, N);
-            return vertList[i];
+
+            if (N == 0)
+            {
+                return default(T);
+            }
+            else
+            {
+                int i = Random.Next(0, N);
+                return vertList[i];
+            }
         }
     }
 }
