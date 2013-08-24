@@ -14,6 +14,7 @@ namespace Evolve2.Examples
         static void Main(string[] args)
         {
             ModifiedMoranProcess.UsingAGraphTypeHelper();
+            ModifiedMoranProcess.UsingAManuallyBuiltGraph();
 
             Console.WriteLine("Press any key to end");
             Console.ReadLine();

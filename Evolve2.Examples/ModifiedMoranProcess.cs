@@ -32,9 +32,46 @@ namespace Evolve2.Examples
             v.State.ChangeStateValue(VertexState.MUTANT);
 
             MoranProcessRunner moranProcess = new MoranProcessRunner(new StateSelector(), new VertexSelector(), new VictimSelector());
-            MoranProcessResult result = moranProcess.RunOn(cliqueGraph, 10, 10000, 3.0d);
+            MoranProcessResult result = moranProcess.RunOn(cliqueGraph, 1000, 10000, 3.0d);
 
             Console.WriteLine("UsingAGraphTypeHelper :: Result");
+            Console.WriteLine("\t Repetitions " + result.RepetitionsPerformed);
+            Console.WriteLine("\t Fixations " + result.Fixations);
+            Console.WriteLine("\t Extinctions " + result.Extinctions);
+            Console.WriteLine("\t Timeouts" + result.Timeout);
+            Console.WriteLine("\t p(Fixation) " + result.FixationProbability);
+            Console.WriteLine("\t p(Extinction) " + result.ExtinctionProbability);
+            Console.WriteLine("\t p(Timeout) " + result.TimeoutProbability);
+        }
+
+        public static void UsingAManuallyBuiltGraph()
+        {
+            IIdentityProvider<Guid> identity = new DefaultIdentityProvider();
+            Graph<Guid> graph = new Graph<Guid>(identity);
+
+            StatefulVertex<Guid, VertexState> v1 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
+            StatefulVertex<Guid, VertexState> v2 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
+            StatefulVertex<Guid, VertexState> v3 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
+            StatefulVertex<Guid, VertexState> v4 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
+            StatefulVertex<Guid, VertexState> v5 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
+
+            graph.AddVertex(v1);
+            graph.AddVertex(v2);
+            graph.AddVertex(v3);
+            graph.AddVertex(v4);
+            graph.AddVertex(v5);
+
+            graph.AddEdge(new Edge<Guid>(v1, v2, identity), false);
+            graph.AddEdge(new Edge<Guid>(v1, v3, identity), false);
+            graph.AddEdge(new Edge<Guid>(v1, v4, identity), false);
+            graph.AddEdge(new Edge<Guid>(v4, v5, identity), false);
+            graph.AddEdge(new Edge<Guid>(v4, v3, identity), false);
+
+
+            MoranProcessRunner moranProcess = new MoranProcessRunner(new StateSelector(), new VertexSelector(), new VictimSelector());
+            MoranProcessResult result = moranProcess.RunOn(graph, 1000, 10000, 3.0d);
+
+            Console.WriteLine("UsingAManuallyBuiltGraph :: Result");
             Console.WriteLine("\t Repetitions " + result.RepetitionsPerformed);
             Console.WriteLine("\t Fixations " + result.Fixations);
             Console.WriteLine("\t Extinctions " + result.Extinctions);
