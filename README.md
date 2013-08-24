@@ -20,3 +20,5 @@ Future additions are likely to be:
 * Cleaner API (less need for generics, easier for the compiler to infer the type) 
 * Performance improvements
 * More complete and thorough test suite
+
+**New!** Evolve2.Examples contains plenty of code examples for making use of this library
