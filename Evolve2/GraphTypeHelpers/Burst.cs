@@ -10,6 +10,10 @@ namespace Evolve2.GraphTypeHelpers
 {
     public class Burst : Burst<Guid>
     {
+        public Burst(IIdentityProvider<Guid> IdentityProvider)
+            : base(new DefaultVertexFactory(), new DefaultEdgeFactory(), IdentityProvider)
+        { }
+
         public Burst()
             : base(new DefaultVertexFactory(), new DefaultEdgeFactory(), new DefaultIdentityProvider())
         { }

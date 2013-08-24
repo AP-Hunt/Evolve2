@@ -10,6 +10,10 @@ namespace Evolve2.GraphTypeHelpers
 {
     public class Clique : Clique<Guid>
     {
+        public Clique(IIdentityProvider<Guid> IdentityProvider)
+            : base(new DefaultVertexFactory(), new DefaultEdgeFactory(), IdentityProvider)
+        { }
+
         public Clique()
             : base(new DefaultVertexFactory(), new DefaultEdgeFactory(), new DefaultIdentityProvider())
         { }

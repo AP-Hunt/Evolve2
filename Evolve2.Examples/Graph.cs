@@ -55,7 +55,7 @@ namespace Evolve2.Examples
             graph.AddVertex(graph_v1);
 
             //Create a second graph which will become the subgraph, providing the same identity provider
-            Chain<Guid> chainHelper = new Chain<Guid>(new DefaultVertexFactory(), new DefaultEdgeFactory(), identityProvider);
+            Chain chainHelper = new Chain(identityProvider);
             Graph<Guid> subGraph = chainHelper.Create(10, false).Graph;
 
             //Add the subgraph

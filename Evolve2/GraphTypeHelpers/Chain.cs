@@ -10,6 +10,10 @@ namespace Evolve2.GraphTypeHelpers
 {
     public class Chain : Chain<Guid>
     {
+        public Chain(IIdentityProvider<Guid> IdentityProvider)
+            : base(new DefaultVertexFactory(), new DefaultEdgeFactory(), IdentityProvider)
+        { }
+
         public Chain()
             : base(new DefaultVertexFactory(), new DefaultEdgeFactory(), new DefaultIdentityProvider())
         { }
