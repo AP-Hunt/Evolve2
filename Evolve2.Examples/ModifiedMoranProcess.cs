@@ -49,11 +49,11 @@ namespace Evolve2.Examples
             IIdentityProvider<Guid> identity = new DefaultIdentityProvider();
             Graph<Guid> graph = new Graph<Guid>(identity);
 
-            StatefulVertex<Guid, VertexState> v1 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
-            StatefulVertex<Guid, VertexState> v2 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
-            StatefulVertex<Guid, VertexState> v3 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
-            StatefulVertex<Guid, VertexState> v4 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
-            StatefulVertex<Guid, VertexState> v5 = new StatefulVertex<Guid, VertexState>(new EnumState(VertexState.MUTANT), identity);
+            StatefulVertex<Guid, VertexState> v1 = new StatefulVertex<Guid, VertexState>(identity, new EnumState(VertexState.MUTANT));
+            StatefulVertex<Guid, VertexState> v2 = new StatefulVertex<Guid, VertexState>(identity, new EnumState(VertexState.MUTANT));
+            StatefulVertex<Guid, VertexState> v3 = new StatefulVertex<Guid, VertexState>(identity, new EnumState(VertexState.MUTANT));
+            StatefulVertex<Guid, VertexState> v4 = new StatefulVertex<Guid, VertexState>(identity, new EnumState(VertexState.MUTANT));
+            StatefulVertex<Guid, VertexState> v5 = new StatefulVertex<Guid, VertexState>(identity, new EnumState(VertexState.MUTANT));
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);

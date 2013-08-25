@@ -23,7 +23,7 @@ namespace Evolve2
             }
         }
 
-        public StatefulVertex(Evolve2.State.IState<TState> StartingState, Util.IIdentityProvider<T> IdentityProvider)
+        public StatefulVertex(Util.IIdentityProvider<T> IdentityProvider, Evolve2.State.IState<TState> StartingState)
             : base(IdentityProvider)
         {
             _state = StartingState;
@@ -31,7 +31,7 @@ namespace Evolve2
 
         public override object Clone()
         {
-            StatefulVertex<T, TState> cloned = new StatefulVertex<T, TState>((Evolve2.State.IState<TState>)this.State.Clone(), _identProvider);
+            StatefulVertex<T, TState> cloned = new StatefulVertex<T, TState>(_identProvider, (Evolve2.State.IState<TState>)this.State.Clone());
             cloned.Identity = this.Identity;
             return cloned;
         }

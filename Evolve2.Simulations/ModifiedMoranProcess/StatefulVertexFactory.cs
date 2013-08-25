@@ -28,7 +28,7 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
 
         public Vertex<T> NewVertex(Util.IIdentityProvider<T> IdentityProvider)
         {
-            return new StatefulVertex<T, TState>((IState<TState>)_defaultState.Clone(), IdentityProvider);
+            return new StatefulVertex<T, TState>(IdentityProvider, (IState<TState>)_defaultState.Clone());
         }
     }
 }
