@@ -44,5 +44,10 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
             EnumState cloned = new EnumState(this.CurrentState);
             return cloned;
         }
+
+        public override bool Equals(IState<VertexState> other)
+        {
+            return this.CurrentState == other.CurrentState;
+        }
     }
 }

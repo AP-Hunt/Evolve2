@@ -44,7 +44,8 @@
   <ItemGroup>
     <Compile Include="EnvironmentalEvolutionaryGraph\EnvironmentalVertex.cs" />
     <Compile Include="EnvironmentalEvolutionaryGraph\EnvironmentType.cs" />
-    <Compile Include="EnvironmentalEvolutionaryGraph\InvidiualType.cs" />
+    <Compile Include="EnvironmentalEvolutionaryGraph\ForegroundState.cs" />
+    <Compile Include="EnvironmentalEvolutionaryGraph\IndividualType.cs" />
     <Compile Include="ModifiedMoranProcess\EnumState.cs" />
     <Compile Include="ModifiedMoranProcess\IStateSelector.cs" />
     <Compile Include="ModifiedMoranProcess\IVertexSelector.cs" />
