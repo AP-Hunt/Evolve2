@@ -24,7 +24,7 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
             _random = Random;
         }
 
-        public MoranProcessResult RunOn<TIdent>(Graph<TIdent> G, int Repetitions, int Iterations, double MutantWeight)
+        public MoranProcessResult RunOn<TIdent>(Graph<TIdent> G, int Repetitions, int Iterations, double MutantFitness)
             where TIdent : struct
         {
             MoranProcessResult result = new MoranProcessResult();
@@ -37,7 +37,7 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
                 int iter = 0;
                 while(iter < Iterations && !graphFixated(repGraph) && !graphExtinct(repGraph))
                 {
-                    IEnumerable<TIdent> targetState = _stateSelector.Select(repGraph, _random, MutantWeight);
+                    IEnumerable<TIdent> targetState = _stateSelector.Select(repGraph, _random, MutantFitness);
                     TIdent vertex = _vertexSelector.Select(targetState, repGraph, _random);
                     IEnumerable<TIdent> destinationVertices = repGraph.VerticesConnectedToVertex(vertex); 
                     TIdent victim = _victimSelector.Select(destinationVertices, repGraph, _random);

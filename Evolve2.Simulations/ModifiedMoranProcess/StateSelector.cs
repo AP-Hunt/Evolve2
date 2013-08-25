@@ -8,7 +8,7 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
 {
     public class StateSelector : IStateSelector
     {
-        public IEnumerable<T> Select<T>(Graph<T> graph, Random Random, double MutantWeight) 
+        public IEnumerable<T> Select<T>(Graph<T> graph, Random Random, double MutantFitness) 
             where T : struct
         {
             /**
@@ -20,7 +20,7 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
              * [3] => Select mutant node set when Pr <= prMutant
              *      [3.1] => Otherwise choose healthy node set
              */
-            double R = MutantWeight;
+            double R = MutantFitness;
             int N = graph.Vertices.Count();
             int m = graph.Vertices.OfType<StatefulVertex<T, VertexState>>().Count(v => v.State.CurrentState == VertexState.MUTANT);
             double prMutant = ((R*m)/((R*m)+(N-m)));

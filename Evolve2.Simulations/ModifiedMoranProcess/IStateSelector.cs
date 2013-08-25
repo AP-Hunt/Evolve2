@@ -9,6 +9,6 @@ namespace Evolve2.Simulations.ModifiedMoranProcess
 {
     public interface IStateSelector
     {
-        IEnumerable<TIdent> Select<TIdent>(Graph<TIdent> graph, Random Random, double MutantWeight) where TIdent : struct;
+        IEnumerable<TIdent> Select<TIdent>(Graph<TIdent> graph, Random Random, double MutantFitness) where TIdent : struct;
     }
 }
