@@ -50,7 +50,5 @@ namespace Evolve2.Simulations.EnvironmentalEvolutionaryGraph
         {
             return new ForegroundState(this.CurrentState);
         }
-
-
     }
 }

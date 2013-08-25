@@ -9,7 +9,6 @@ namespace Evolve2.Simulations.EnvironmentalEvolutionaryGraph
     {
         public int RepetitionsPerformed { get; set; }
         public int Fixations { get; set; }
-        public int Extinctions { get; set; }
         public int Timeout { get; set; }
 
         public double FixationProbability
@@ -17,14 +16,6 @@ namespace Evolve2.Simulations.EnvironmentalEvolutionaryGraph
             get
             {
                 return ((double)Fixations / (double)RepetitionsPerformed);
-            }
-        }
-
-        public double ExtinctionProbability
-        {
-            get
-            {
-                return ((double)Extinctions / (double)RepetitionsPerformed);
             }
         }
 

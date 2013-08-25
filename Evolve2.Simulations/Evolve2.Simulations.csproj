@@ -47,6 +47,13 @@
     <Compile Include="EnvironmentalEvolutionaryGraph\ForegroundState.cs" />
     <Compile Include="EnvironmentalEvolutionaryGraph\IndividualType.cs" />
     <Compile Include="EnvironmentalEvolutionaryGraph\EEGResult.cs" />
+    <Compile Include="EnvironmentalEvolutionaryGraph\EEGRunner.cs" />
+    <Compile Include="EnvironmentalEvolutionaryGraph\IStateSelector.cs" />
+    <Compile Include="EnvironmentalEvolutionaryGraph\IVertexSelector.cs" />
+    <Compile Include="EnvironmentalEvolutionaryGraph\IVictimSelector.cs" />
+    <Compile Include="EnvironmentalEvolutionaryGraph\StateSelector.cs" />
+    <Compile Include="EnvironmentalEvolutionaryGraph\VertexSelector.cs" />
+    <Compile Include="EnvironmentalEvolutionaryGraph\VictimSelector.cs" />
     <Compile Include="ModifiedMoranProcess\EnumState.cs" />
     <Compile Include="ModifiedMoranProcess\IStateSelector.cs" />
     <Compile Include="ModifiedMoranProcess\IVertexSelector.cs" />

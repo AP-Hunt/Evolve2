@@ -31,7 +31,7 @@ namespace Evolve2.Simulations.EnvironmentalEvolutionaryGraph
         }
 
         private Func<TIndividual, TEnvironment, bool> _matcherFunc;
-        public bool InPreferredEnvironment
+        public bool InMatchingEnvironment
         {
             get
             {
