@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Evolve2.Simulations.EnvironmentalEvolutionaryGraph
 {
-    public enum InvidiualType
+    public enum InvididualType
     {
         RED = 0,
         BLUE = 1
