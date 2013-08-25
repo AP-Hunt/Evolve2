@@ -63,5 +63,31 @@ namespace Evolve2.Examples
             //The vertex producer should return the vertex in the subgraph which will be connected in to the main graph
             graph.AddSubgraph(graph_v1, subGraph, (g) => g.Vertices.First());
         }
+
+        public static void AddingAdditionalEdgesInToASubgraph()
+        {
+            //Construct the graph with the same identity provider as will be used for the vertices, edge and subgraphs
+            IIdentityProvider<Guid> identityProvider = new DefaultIdentityProvider();
+            Graph<Guid> graph = new Graph<Guid>(identityProvider);
+
+            //There must be at least one vertex in the graph before adding a subgraph,
+            //so the subgraph has something to connect to
+            Vertex<Guid> graph_v1 = new Vertex<Guid>(identityProvider);
+            graph.AddVertex(graph_v1);
+
+            //Create a second graph which will become the subgraph, providing the same identity provider
+            Chain chainHelper = new Chain(identityProvider);
+            Graph<Guid> subGraph = chainHelper.Create(10, false).Graph;
+
+            //Add the subgraph
+            //The source is the vertex in the main graph that the subgraph will connect to
+            //The vertex producer should return the vertex in the subgraph which will be connected in to the main graph
+            graph.AddSubgraph(graph_v1, subGraph, (g) => g.Vertices.First());
+
+            //Add a subgraph edge
+            //The subgraph parameter must be a graph which is already a subgraph of the supergraph
+            //And the result of VertexProducer must a vertex in the supplied subgraph
+            graph.AddSubgraphEdge(graph_v1, subGraph, (g) => g.Vertices.ElementAt(1));
+        }
     }
 }

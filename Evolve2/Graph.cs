@@ -112,37 +112,63 @@ namespace Evolve2
             }
         }
 
-        public void AddSubgraph(Vertex<TIdentity> Source, Graph<TIdentity> G, Func<Graph<TIdentity>, Vertex<TIdentity>> VertexProducer)
+        public void AddSubgraph(Vertex<TIdentity> Source, Graph<TIdentity> Subgraph, Func<Graph<TIdentity>, Vertex<TIdentity>> VertexProducer)
         {
             if (!hasVertex(Source.Identity))
             {
                 throw new ArgumentException("Source", "Source vertex must be a part of the supergraph");
             }
 
-            if (_identProvider.Equals(this.Identity, G.Identity))
+            if (_identProvider.Equals(this.Identity, Subgraph.Identity))
             {
                 throw new ArgumentException("G", "Subgraph cannot be the supergraph");
             }
 
-            if(_subGraphs.ContainsKey(G.Identity))
+            if(_subGraphs.ContainsKey(Subgraph.Identity))
             {
                 throw new ArgumentException("G", "Subgraph already exists in supergraph");
             }
 
-            Vertex<TIdentity> d = VertexProducer(G);
-            if (!G.hasVertex(d.Identity))
+            Vertex<TIdentity> subgraphVertex = VertexProducer(Subgraph);
+            if (!Subgraph.hasVertex(subgraphVertex.Identity))
             {
                 throw new ArgumentException("VertexProducer", "Vertex returned from VertexProducer must be part of the subgraph");
             }
 
-            _subGraphs.Add(G.Identity, G);
+            _subGraphs.Add(Subgraph.Identity, Subgraph);
 
-            if (!_subGraphEdges.ContainsKey(G.Identity))
+            if (!_subGraphEdges.ContainsKey(Subgraph.Identity))
             {
-                _subGraphEdges.Add(G.Identity, new List<SubgraphEdge<TIdentity>>());
+                _subGraphEdges.Add(Subgraph.Identity, new List<SubgraphEdge<TIdentity>>());
             }
 
-            _subGraphEdges[G.Identity].Add(new SubgraphEdge<TIdentity>(Source, G, VertexProducer, _identProvider));
+            _subGraphEdges[Subgraph.Identity].Add(new SubgraphEdge<TIdentity>(Source, Subgraph, VertexProducer, _identProvider));
+        }
+
+        public void AddSubgraphEdge(Vertex<TIdentity> Source, Graph<TIdentity> Subgraph, Func<Graph<TIdentity>, Vertex<TIdentity>> VertexProducer)
+        {
+            if (!hasVertex(Source.Identity))
+            {
+                throw new ArgumentException("Source", "Source vertex must be a part of the supergraph");
+            }
+
+            if (_identProvider.Equals(this.Identity, Subgraph.Identity))
+            {
+                throw new ArgumentException("G", "Subgraph cannot be the supergraph");
+            }
+
+            Vertex<TIdentity> subgraphVertex = VertexProducer(Subgraph);
+            if (!Subgraph.hasVertex(subgraphVertex.Identity))
+            {
+                throw new ArgumentException("VertexProducer", "Vertex returned from VertexProducer must be part of the subgraph");
+            }
+
+            if (!_subGraphEdges.ContainsKey(Subgraph.Identity))
+            {
+                throw new ArgumentException("Subgraph", string.Format("Graph {0} must be a subgraph of this graph to add an edge. Call AddSubgraph first", Subgraph.Identity));
+            }
+
+            _subGraphEdges[Subgraph.Identity].Add(new SubgraphEdge<TIdentity>(Source, Subgraph, VertexProducer, _identProvider));
         }
 
         public IEnumerable<Vertex<TIdentity>> VerticesByIdentity(IEnumerable<TIdentity> Identities)
