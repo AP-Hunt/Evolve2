@@ -61,7 +61,9 @@
     <Compile Include="State\StateBase.cs" />
     <Compile Include="TimedGraph.cs" />
     <Compile Include="ITimedGraphElement.cs" />
+    <Compile Include="TimedHelpers\TimeRangePresence.cs" />
     <Compile Include="TimedVertex.cs" />
+    <Compile Include="TimeStepsExceededException.cs" />
     <Compile Include="Util\Factories\DefaultEdgeFactory.cs" />
     <Compile Include="Util\Factories\DefaultVertexFactory.cs" />
     <Compile Include="Util\Factories\IEdgeFactory.cs" />
