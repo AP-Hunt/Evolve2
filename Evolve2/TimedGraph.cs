@@ -52,6 +52,11 @@ namespace Evolve2
             _currentTimeStep = NextStep;
         }
 
+        public void SetMaxTimeSteps(int MaxSteps)
+        {
+            _maxTimeStep = MaxSteps;
+        }
+
         public void AddTimedVertex(TimedVertex<TIdentity> Vertex)
         {
             if (Vertex == null)
