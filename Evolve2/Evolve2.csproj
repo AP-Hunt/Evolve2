@@ -60,7 +60,7 @@
     <Compile Include="State\IState.cs" />
     <Compile Include="State\StateBase.cs" />
     <Compile Include="TimedGraph.cs" />
-    <Compile Include="TimedGraphElement.cs" />
+    <Compile Include="ITimedGraphElement.cs" />
     <Compile Include="TimedVertex.cs" />
     <Compile Include="Util\Factories\DefaultEdgeFactory.cs" />
     <Compile Include="Util\Factories\DefaultVertexFactory.cs" />
