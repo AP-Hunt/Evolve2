@@ -19,21 +19,21 @@ namespace Evolve2
         }
 
         protected internal Dictionary<TIdentity, Vertex<TIdentity>> _vertices;
-        public IEnumerable<Vertex<TIdentity>> Vertices
+        public virtual IEnumerable<Vertex<TIdentity>> Vertices
         {
             get
             {
                 return _vertices.Values.Union(_subGraphs.Values.SelectMany(g => g.Vertices));
             }
         }
-        public IEnumerable<TIdentity> VertexIdentities
+        public virtual IEnumerable<TIdentity> VertexIdentities
         {
             get
             {
                 return _vertices.Keys.Union(_subGraphs.Values.SelectMany(g => g.VertexIdentities));
             }
         }
-        public Vertex<TIdentity> FindVertex(TIdentity Identity)
+        public virtual Vertex<TIdentity> FindVertex(TIdentity Identity)
         {
             if (!_vertices.ContainsKey(Identity))
             {
@@ -44,7 +44,7 @@ namespace Evolve2
         }
 
         protected internal ICollection<Edge<TIdentity>> _edges;
-        public IEnumerable<Edge<TIdentity>> Edges
+        public virtual IEnumerable<Edge<TIdentity>> Edges
         {
             get
             {
