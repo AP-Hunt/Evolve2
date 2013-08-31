@@ -27,6 +27,17 @@ namespace Evolve2
             }
         }
 
+        /// <summary>
+        /// Gets the current time step 
+        /// </summary>
+        public int CurrentTimeStep
+        {
+            get
+            {
+                return _currentTimeStep;
+            }
+        }
+
         public TimedGraph(IIdentityProvider<TIdentity> IdentityProvider, int MaxTimeStep)
             : base(IdentityProvider)
         {
