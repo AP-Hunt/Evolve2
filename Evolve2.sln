@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve2.Simulations", "Evol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve2.Examples", "Evolve2.Examples\Evolve2.Examples.csproj", "{053F984B-BF77-42A8-A182-32146660FF47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve2.Tests", "Evolve2.Tests\Evolve2.Tests.csproj", "{CD755CDD-BB81-444F-9353-A8FA1143717B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{053F984B-BF77-42A8-A182-32146660FF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{053F984B-BF77-42A8-A182-32146660FF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{053F984B-BF77-42A8-A182-32146660FF47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD755CDD-BB81-444F-9353-A8FA1143717B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD755CDD-BB81-444F-9353-A8FA1143717B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD755CDD-BB81-444F-9353-A8FA1143717B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD755CDD-BB81-444F-9353-A8FA1143717B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
