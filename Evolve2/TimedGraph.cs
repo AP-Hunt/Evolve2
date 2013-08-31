@@ -57,7 +57,7 @@ namespace Evolve2
                 throw new TimeStepsExceededException();
             }
 
-            Tick(_currentTimeStep++);
+            Tick(++_currentTimeStep);
         }
 
         /// <summary>
