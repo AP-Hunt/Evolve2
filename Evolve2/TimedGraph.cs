@@ -127,8 +127,8 @@ namespace Evolve2
         /// <param name="T"></param>
         private void recomputeVertexSet(int T)
         {
-            IEnumerable<Vertex<TIdentity>> vertices = base.Vertices;
-            vertices.Union(cachedVerticesAtTimeStep(T));
+            List<Vertex<TIdentity>> vertices = base.Vertices.ToList();
+            vertices.AddRange(cachedVerticesAtTimeStep(T));
 
             _computedVertexSet = vertices;
         }
