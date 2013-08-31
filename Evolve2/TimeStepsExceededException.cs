@@ -5,7 +5,10 @@ using System.Text;
 
 namespace Evolve2
 {
-    class TimeStepsExceededException : Exception
+    public class TimeStepsExceededException : Exception
     {
+        public TimeStepsExceededException()
+            : base()
+        { }
     }
 }
